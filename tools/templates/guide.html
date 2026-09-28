@@ -148,6 +148,12 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .wkb{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--series);color:var(--surface)}
 .wk-banner{margin:16px 0 0;padding:10px 12px;border-radius:12px;background:var(--series-s);border:1.5px solid var(--series);font-size:14px;line-height:1.5}
 .wk-banner b{display:block;color:var(--series);font-size:12px;margin-bottom:2px}
+.wk-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.wk-pbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;font:inherit;font-size:11px;font-weight:700;color:var(--series);cursor:pointer}
+.wk-pbtn img{width:52px;height:74px;object-fit:cover;border-radius:6px;border:1.5px solid var(--series);display:block;background:var(--surface)}
+.pv{position:fixed;inset:0;z-index:20;background:rgba(8,10,18,.92);display:flex;align-items:center;justify-content:center;padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.pv img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.pv .close{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px}
 </style>
 
 <div class="wrap">
@@ -169,11 +175,13 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
   <footer id="foot"></footer>
 </div>
 <div class="scrim" id="scrim" hidden></div>
+<div class="pv" id="pv" role="dialog" aria-modal="true" aria-label="ポスター" hidden><img id="pvImg" alt="今週のおすすめ台のポスター"><button class="close" id="pvClose" aria-label="閉じる">×</button></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="sheet-in" id="sheetIn"></div></div>
 
 <script>
 let DATA = /*__DATA__*/;
-let WEEKLY = /*__WEEKLY__*/null; // 週間おすすめ台（data/weekly.json）
+let WEEKLY = /*__WEEKLY__*/null;
+const BASE = ''; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
 const API = '/*__API__*/'; // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
 const RATE = {
   pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
@@ -220,7 +228,7 @@ function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
 function weeklyHTML(filter){
   const list=wkMatches().filter(w=>filter(w.m)).sort((a,b)=>(b.m.cat===cat)-(a.m.cat===cat));
   if(!list.length) return '';
-  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="ポスターを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">ポスターを見る</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
 }
 function render(){
   document.querySelectorAll('.tab').forEach(t=>{
@@ -277,15 +285,24 @@ function openSheet(id){
 }
 function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock');if(pending){const d=pending;pending=null;applyData(d)}}
 function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
-window.addEventListener('popstate',hideSheet);
+function openPoster(){
+  $('#pvImg').src=BASE+WEEKLY.poster;
+  try{history.pushState({pv:1},'')}catch(e){}
+  $('#pv').hidden=false;document.body.classList.add('lock');$('#pvClose').focus();
+}
+function hidePoster(){$('#pv').hidden=true;if($('#sheet').hidden)document.body.classList.remove('lock')}
+function closePoster(){if($('#pv').hidden)return;if(history.state&&history.state.pv){history.back()}else{hidePoster()}}
+window.addEventListener('popstate',()=>{if(!$('#pv').hidden){hidePoster();return}hideSheet()});
 document.addEventListener('click',e=>{
   const t=e.target.closest('.tab'); if(t){cat=t.dataset.cat;rate='all';history.replaceState(null,'','#'+cat);render();return}
   const c=e.target.closest('.chip'); if(c){rate=c.dataset.rate;render();return}
+  if(e.target.closest('#wkPoster')){openPoster();return}
+  if(e.target.id==='pvClose'||e.target.id==='pv'){closePoster();return}
   const wk=e.target.closest('.wk'); if(wk){openSheet(+wk.dataset.id);return}
   const row=e.target.closest('.row'); if(row){openSheet(+row.dataset.id);return}
   if(e.target.id==='close'||e.target.id==='scrim') closeSheet();
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#pv').hidden)closePoster();else closeSheet()}});
 $('#q').addEventListener('input',e=>{q=e.target.value;render()});
 window.addEventListener('hashchange',()=>{cat=location.hash==='#slot'?'slot':'pachi';render()});
 let pending=null;

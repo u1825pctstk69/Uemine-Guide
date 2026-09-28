@@ -19,6 +19,7 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 
 - ユーザーから週のおすすめ（ポスター画像など）を受け取ったら `data/weekly.json` を書き換えて `python3 tools/update.py`（引数なし）→ commit / push
 - 形式: `{"title": 企画名, "start": "YYYY-MM-DD", "end": "YYYY-MM-DD", "items": [{"name": 配置図の型式名, "rate": 任意(4P/1P/20S/5S), "comment": 一言}]}`
+- ポスター画像がある場合は `assets/weekly/<開始日>_<名前>.jpg`（JPEG・幅640px程度）とサムネイル `_thumb.jpg` を置き、`poster` / `poster_thumb` に指定（「ポスターを見る」で全画面表示）
 - 期間外（end を過ぎた）は自動で非表示になる
 - 一言は機種の特徴だけにする。設定・出玉を連想させる表現（熱い、高設定など）は広告規制に触れるため使わない
 
