@@ -236,7 +236,7 @@ function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
 function weeklyHTML(filter){
   const list=wkMatches().filter(w=>filter(w.m));
   if(!list.length) return '';
-  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="ポスターを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">ポスターを見る</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
 }
 function render(){
   const all=PAGE.flatMap(m=>m.nos);
