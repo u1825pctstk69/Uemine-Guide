@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2F5BD3">
+<title>上峰店 20円スマスロガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#151B2E; --muted:#5B6275; --line:#E0E3EC; --chip:#EEF0F6;
+  --hero:#2F5BD3; --hero2:#16307E; --hero-ink:#FFFFFF; --gold:#FFD166; --field:#FFFFFF;
+  --pachi:#C8102E; --slot:#2F5BD3;
+  --r4:#D62839; --r4s:#FDE8EB; --r4t:#B31B2C;
+  --r1:#F07B0F; --r1s:#FFF0E0; --r1t:#B45400;
+  --r20:#2F5BD3; --r20s:#E6EDFD; --r20t:#2548AE;
+  --r5:#0F9D8A; --r5s:#DFF5F1; --r5t:#0A7466;
+  --t-ama:#2E7D32; --t-amas:#E4F4E4; --t-mid:#B0173A; --t-mids:#FCE6EB; --t-smp:#6B3FB8; --t-smps:#EFE8FB;
+  --t-a:#8A5A00; --t-as:#FFF2D2; --t-at:#2A4FB0; --t-ats:#E5ECFC; --t-sms:#A1257D; --t-smss:#FBE6F5;
+  --series:#8A5A00; --series-s:#FFF2D2;
+  --shadow:0 -8px 30px rgba(21,27,46,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1320; --surface:#181D2C; --ink:#ECEEF5; --muted:#A1A8BC; --line:#2A3144; --chip:#232A3C;
+    --hero:#1E3C94; --hero2:#0E1E4E; --field:#232A3C;
+    --pachi:#E0314D; --slot:#4C78F0;
+    --r4:#FF5A6B; --r4s:#3A1C24; --r4t:#FF8A96;
+    --r1:#FF9A3D; --r1s:#3A2814; --r1t:#FFB36B;
+    --r20:#6E93FF; --r20s:#1C2748; --r20t:#9DB5FF;
+    --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
+    --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
+    --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
+    --series:#F2C35E; --series-s:#3A2E14;
+    --shadow:0 -8px 30px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1320; --surface:#181D2C; --ink:#ECEEF5; --muted:#A1A8BC; --line:#2A3144; --chip:#232A3C;
+  --hero:#1E3C94; --hero2:#0E1E4E; --field:#232A3C;
+  --pachi:#E0314D; --slot:#4C78F0;
+  --r4:#FF5A6B; --r4s:#3A1C24; --r4t:#FF8A96;
+  --r1:#FF9A3D; --r1s:#3A2814; --r1t:#FFB36B;
+  --r20:#6E93FF; --r20s:#1C2748; --r20t:#9DB5FF;
+  --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
+  --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
+  --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
+  --series:#F2C35E; --series-s:#3A2E14;
+  --shadow:0 -8px 30px rgba(0,0,0,.5);
+}
+[data-r="4P"]{--rc:var(--r4);--rs:var(--r4s);--rt:var(--r4t)}
+[data-r="1P"]{--rc:var(--r1);--rs:var(--r1s);--rt:var(--r1t)}
+[data-r="20S"]{--rc:var(--r20);--rs:var(--r20s);--rt:var(--r20t)}
+[data-r="5S"]{--rc:var(--r5);--rs:var(--r5s);--rt:var(--r5t)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body.lock{overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:0 40px}
+header{margin-inline:-16px;padding:16px 16px 18px;color:var(--hero-ink);border-radius:0 0 22px 22px;
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 14px,transparent 14px 28px),
+    linear-gradient(160deg,var(--hero),var(--hero2))}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand small{font-size:12px;opacity:.85;letter-spacing:.08em}
+h1{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:26px;margin:4px 0 14px;letter-spacing:.02em}
+h1 span{color:var(--gold)}
+input[type=search]{width:100%;font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:0;background:var(--field);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.stick{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-16px;padding:10px 16px 10px;border-bottom:1px solid var(--line)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--chip);padding:4px;border-radius:12px}
+.tab{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;padding:10px 8px;border-radius:9px;cursor:pointer;display:flex;justify-content:center;gap:8px;align-items:baseline}
+.tab .n{font-size:12px;font-weight:500;font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"]{color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+#tab-pachi[aria-selected="true"]{background:var(--pachi)}
+#tab-slot[aria-selected="true"]{background:var(--slot)}
+.tools{padding-top:8px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;appearance:none;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:500;min-height:38px;padding:6px 14px;border-radius:999px;cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--rc)}
+.chip[data-r]{border-color:var(--rc)}
+.chip[aria-pressed="true"]{background:var(--rc,var(--ink));border-color:var(--rc,var(--ink));color:#fff}
+.chip[aria-pressed="true"][data-rate="all"]{background:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"] i{background:#fff}
+button:focus-visible,input:focus-visible,a:focus-visible,.row:focus-visible{outline:2px solid var(--pachi);outline-offset:2px}
+section.rate{margin-top:20px}
+.rate-h{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 2px 8px}
+.rate-h h2{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:15px;margin:0;background:var(--rc);color:#fff;padding:5px 14px;border-radius:999px;letter-spacing:.03em}
+.rate-h span{font-size:12px;color:var(--rt);font-weight:700;font-variant-numeric:tabular-nums}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:center;padding:12px 14px;border-top:1px solid var(--line);cursor:pointer;background:var(--surface);width:100%;text-align:left;font:inherit;color:inherit;border-left:0;border-right:0;border-bottom:0}
+.list .row:first-child{border-top:0}
+.row:hover,.row:active{background:var(--rs)}
+.name{font-weight:700;font-size:15px;line-height:1.35}
+.meta{grid-column:1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12px;color:var(--muted)}
+.meta .ser{color:var(--series)}
+.count{grid-row:1/span 2;grid-column:2;display:grid;place-items:center;min-width:44px;height:44px;border-radius:12px;background:var(--rs);color:var(--rt);font-variant-numeric:tabular-nums;line-height:1}
+.count b{font-size:18px}
+.count small{font-size:10px;margin-top:-10px}
+.type{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;background:var(--chip);color:var(--ink)}
+.type[data-t="ama"]{background:var(--t-amas);color:var(--t-ama)}
+.type[data-t="mid"]{background:var(--t-mids);color:var(--t-mid)}
+.type[data-t="smp"]{background:var(--t-smps);color:var(--t-smp)}
+.type[data-t="a"]{background:var(--t-as);color:var(--t-a)}
+.type[data-t="at"]{background:var(--t-ats);color:var(--t-at)}
+.type[data-t="sms"]{background:var(--t-smss);color:var(--t-sms)}
+.empty{padding:28px 16px;text-align:center;color:var(--muted)}
+footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
+/* detail sheet */
+.scrim{position:fixed;inset:0;background:rgba(10,14,24,.5);z-index:10}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:11;max-height:88vh;max-height:88dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-radius:20px 20px 0 0;box-shadow:var(--shadow);padding:0 0 calc(24px + env(safe-area-inset-bottom,0px))}
+.sheet-in{max-width:640px;margin:0 auto}
+.sheet-head{background:var(--rs);padding:10px 16px 16px;border-radius:20px 20px 0 0}
+.sheet-body{padding:0 16px}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--rc);opacity:.5;margin:0 auto 12px}
+.sheet-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.close{appearance:none;border:0;background:var(--surface);color:var(--ink);width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.sheet h3{font-size:21px;line-height:1.35;margin:8px 0 0;text-wrap:balance}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;background:var(--surface)}
+.tag.rate{background:var(--rc);color:#fff}
+.tag.series{background:var(--series-s);color:var(--series)}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:16px 0;font-size:14px;align-items:start}
+.facts dt{color:var(--muted);padding-top:2px}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.facts dd b{color:var(--rt);font-size:18px}
+.nos{display:flex;flex-wrap:wrap;gap:5px}
+.nos span{border:1.5px solid var(--rc);color:var(--rt);border-radius:7px;padding:1px 8px;font-size:13px;font-weight:700}
+.cta{display:flex;justify-content:center;align-items:center;gap:8px;text-decoration:none;background:var(--rc);color:#fff;font-weight:700;padding:14px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.rec{margin-top:24px}
+.rec h4{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.rec h4::before{content:"";width:6px;height:16px;border-radius:3px;background:var(--hd)}
+.rec.series-rec{--hd:var(--series)}
+.rec.type-rec{--hd:var(--rc)}
+.rec p{font-size:12px;color:var(--muted);margin:0 0 8px}
+.rec .list{border-radius:12px}
+.rec .row{padding:10px 12px}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:up .22s ease-out}@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}}
+.sub{font-size:13px;opacity:.9;margin:-8px 0 0;font-variant-numeric:tabular-nums}
+.row.floor{grid-template-columns:auto 1fr auto}
+.row.floor .no{grid-row:1/span 2;display:grid;place-items:center;min-width:52px;height:52px;border-radius:12px;background:var(--rc);color:#fff;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;line-height:1}
+.row.floor .no small{font-size:10px;font-weight:500;opacity:.9;margin-top:-8px}
+.row.floor .name,.row.floor .meta{grid-column:2}
+.row.floor .go{grid-row:1/span 2;grid-column:3;color:var(--rt);font-size:20px}
+.intro{font-size:13px;color:var(--muted);margin:14px 2px 0}
+</style>
+<style>[hidden]{display:none!important}img{max-width:100%}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><small>コトブキプラス上峰店</small><small id="upd"></small></div>
+    <h1>20円スマスロ<span>ガイド</span></h1>
+    <p class="sub" id="sub"></p>
+  </header>
+  <p class="intro">台番号の順に並んでいます。機種をタップすると詳しい情報と、おすすめの台が見られます。</p>
+  <main id="main"></main>
+  <footer id="foot"></footer>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="sheet-in" id="sheetIn"></div></div>
+
+<script>
+const DATA = {"updated": "2026-09-17", "sheet": "9月17日開店", "machines": [{"name": "新世紀エヴァンゲリオン15 未来への咆哮", "full": "P新世紀エヴァンゲリオン15 未来への咆哮", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "エヴァンゲリオン", "rate": "1P", "nos": [67, 79, 83, 85, 87], "pw": "9509"}, {"name": "スーパー海物語IN地中海2", "full": "PAスーパー海物語IN地中海2HLA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [120, 122, 123, 124], "pw": "10055"}, {"name": "スーパー海物語INジャパン2", "full": "PAスーパー海物語INジャパン2MG", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [103, 104, 109], "pw": "9017"}, {"name": "スーパー海物語IN沖縄5", "full": "PAスーパー海物語IN沖縄5SBA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [117, 118, 119], "pw": "9421"}, {"name": "わんわんセレブレーション", "full": "PAわんわんセレブレーションAGBD", "cat": "pachi", "type": "甘デジ・ライト", "series": "わんわん", "rate": "1P", "nos": [98, 99], "pw": "10089"}, {"name": "アズールレーンTHE ANIMATION~異次元トリガー199", "full": "PアズールレーンTHE ANIMATION~異次元トリガー199~M4", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "アズールレーン", "rate": "1P", "nos": [69, 131], "pw": "10073"}, {"name": "シン・エヴァンゲリオン", "full": "Pシン・エヴァンゲリオンX", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "エヴァンゲリオン", "rate": "1P", "nos": [47, 49], "pw": "9925"}, {"name": "スーパー海物語IN地中海", "full": "PAスーパー海物語IN地中海SBA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [107, 108], "pw": "9145"}, {"name": "ドラム海物語INジャパン", "full": "PAドラム海物語INジャパンRBB", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [113, 114], "pw": "9239"}, {"name": "フィーバーからくりサーカス", "full": "PフィーバーからくりサーカスY", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "からくりサーカス", "rate": "1P", "nos": [95, 125], "pw": "9901"}, {"name": "乗物娘", "full": "PA乗物娘N-K YT200", "cat": "pachi", "type": "甘デジ・ライト", "series": null, "rate": "1P", "nos": [93, 94], "pw": "9455"}, {"name": "元祖ギンギラパラダイス", "full": "PA元祖ギンギラパラダイスHBC", "cat": "pachi", "type": "甘デジ・ライト", "series": "ギンギラパラダイス", "rate": "1P", "nos": [115, 116], "pw": "9813"}, {"name": "大海物語4スペシャル", "full": "PA大海物語4スペシャルRBA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [105, 106], "pw": "9296"}, {"name": "大海物語5", "full": "PA大海物語5ARBC", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [111, 112], "pw": "9833"}, {"name": "豊丸ととある企業の最新作2", "full": "PA豊丸ととある企業の最新作2V1", "cat": "pachi", "type": "甘デジ・ライト", "series": "とある", "rate": "1P", "nos": [61, 63], "pw": "9918"}, {"name": "とある魔術の禁書目録 一方通行", "full": "eとある魔術の禁書目録 一方通行 BIG JKZ", "cat": "pachi", "type": "スマパチ", "series": "とある", "rate": "1P", "nos": [45], "pw": "10279"}, {"name": "とある魔術の禁書目録2", "full": "Pとある魔術の禁書目録2JMZ", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "1P", "nos": [57], "pw": "9957"}, {"name": "とある魔術の禁書目録2 Light", "full": "Pとある魔術の禁書目録2 Light JWX", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "1P", "nos": [53], "pw": "10192"}, {"name": "とある魔術の禁書目録Light", "full": "Pとある魔術の禁書目録Light JRB", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "1P", "nos": [59], "pw": "9565"}, {"name": "スーパー海物語IN沖縄2", "full": "Pスーパー海物語IN沖縄2 SAHS", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "海物語", "rate": "1P", "nos": [110], "pw": "8762"}, {"name": "スーパー海物語IN沖縄5", "full": "Pスーパー海物語IN沖縄5YTC", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "海物語", "rate": "1P", "nos": [97], "pw": "9625"}, {"name": "デジハネガオガオキング3", "full": "PAデジハネガオガオキング3SWQA", "cat": "pachi", "type": "甘デジ・ライト", "series": null, "rate": "1P", "nos": [126], "pw": "9037"}, {"name": "フィーバーアクエリオン6", "full": "PAフィーバーアクエリオン6bY", "cat": "pachi", "type": "甘デジ・ライト", "series": null, "rate": "1P", "nos": [91], "pw": "9210"}, {"name": "フィーバークィーンII", "full": "PフィーバークィーンII", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "クィーン", "rate": "1P", "nos": [51], "pw": "9225"}, {"name": "フィーバータイガーマスクW", "full": "PフィーバータイガーマスクW Y", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "タイガーマスク", "rate": "1P", "nos": [130], "pw": "9432"}, {"name": "フィーバーダンまち2", "full": "PAフィーバーダンまち2YG", "cat": "pachi", "type": "甘デジ・ライト", "series": "ダンまち", "rate": "1P", "nos": [71], "pw": "10322"}, {"name": "フィーバー戦姫絶唱シンフォギア", "full": "Pフィーバー戦姫絶唱シンフォギアYR", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "シンフォギア", "rate": "1P", "nos": [90], "pw": "9294"}, {"name": "フィーバー機動戦士ガンダムユニコーン2", "full": "eフィーバー機動戦士ガンダムユニコーン2 R", "cat": "pachi", "type": "スマパチ", "series": "ガンダム", "rate": "1P", "nos": [65], "pw": "10080"}, {"name": "フィーバー真花月2", "full": "PAフィーバー真花月2Y", "cat": "pachi", "type": "甘デジ・ライト", "series": "花月", "rate": "1P", "nos": [132], "pw": "9275"}, {"name": "フィーバー革命機ヴァルヴレイヴ3", "full": "Pフィーバー革命機ヴァルヴレイヴ3Y", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "1P", "nos": [96], "pw": "10103"}, {"name": "大海物語5", "full": "P大海物語5HCL", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "海物語", "rate": "1P", "nos": [127], "pw": "9916"}, {"name": "天才バカボン6", "full": "P天才バカボン6FD-RS", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "1P", "nos": [55], "pw": "9782"}, {"name": "宇宙戦艦ヤマト2202", "full": "P宇宙戦艦ヤマト2202bH", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "宇宙戦艦ヤマト", "rate": "1P", "nos": [89], "pw": "9706"}, {"name": "新世紀エヴァンゲリオン シト、新生", "full": "P新世紀エヴァンゲリオン シト、新生Y", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "エヴァンゲリオン", "rate": "1P", "nos": [129], "pw": "9167"}, {"name": "東京リベンジャーズ", "full": "e東京リベンジャーズGFEC", "cat": "pachi", "type": "スマパチ", "series": "東京リベンジャーズ", "rate": "1P", "nos": [64], "pw": "10262"}, {"name": "海物語3", "full": "PA海物語3R2", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [101], "pw": "9079"}, {"name": "海物語3R2スペシャル", "full": "PA海物語3R2スペシャルMBA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "1P", "nos": [102], "pw": "9493"}, {"name": "牙狼MUSEUM", "full": "P牙狼MUSEUM-MA", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "牙狼", "rate": "1P", "nos": [77], "pw": "9684"}, {"name": "真・花の慶次2", "full": "PA真・花の慶次2N2-X1", "cat": "pachi", "type": "甘デジ・ライト", "series": "花の慶次", "rate": "1P", "nos": [92], "pw": "9578"}, {"name": "真黄門ちゃま9", "full": "P真黄門ちゃま9YU1Y", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "1P", "nos": [75], "pw": "9307"}, {"name": "花の慶次~蓮", "full": "PA花の慶次~蓮N-V", "cat": "pachi", "type": "甘デジ・ライト", "series": "花の慶次", "rate": "1P", "nos": [73], "pw": "9287"}, {"name": "貞子", "full": "P貞子FMD", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "1P", "nos": [81], "pw": "10059"}, {"name": "野生の王国5", "full": "PA野生の王国5 N-K", "cat": "pachi", "type": "甘デジ・ライト", "series": null, "rate": "1P", "nos": [128], "pw": "9499"}, {"name": "新世紀エヴァンゲリオン15 未来への咆哮", "full": "P新世紀エヴァンゲリオン15 未来への咆哮Y", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "エヴァンゲリオン", "rate": "4P", "nos": [3, 4, 5, 6, 23], "pw": "9993"}, {"name": "とある魔術の禁書目録2", "full": "Pとある魔術の禁書目録2JMZ", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "4P", "nos": [42, 43, 44], "pw": "9957"}, {"name": "とある科学の超電磁砲2", "full": "Pとある科学の超電磁砲2JMB", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "4P", "nos": [40, 41], "pw": "10092"}, {"name": "スーパー海物語IN地中海2", "full": "PAスーパー海物語IN地中海2HLA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "4P", "nos": [20, 32], "pw": "10055"}, {"name": "フィーバー炎炎ノ消防隊", "full": "Pフィーバー炎炎ノ消防隊G", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "炎炎ノ消防隊", "rate": "4P", "nos": [7, 8], "pw": "9795"}, {"name": "Re:ゼロから始める異世界生活", "full": "e Re:ゼロから始める異世界生活 season2M13", "cat": "pachi", "type": "スマパチ", "series": "Re:ゼロ", "rate": "4P", "nos": [22], "pw": "9931"}, {"name": "Re:ゼロから始める異世界生活鬼がかり", "full": "PRe:ゼロから始める異世界生活鬼がかりverM08", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "Re:ゼロ", "rate": "4P", "nos": [37], "pw": "9537"}, {"name": "ToLOVEるダークネス", "full": "PToLOVEるダークネスL9YZ4", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [10], "pw": "10130"}, {"name": "とある科学の超電磁砲", "full": "Pとある科学の超電磁砲FSB", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "4P", "nos": [39], "pw": "9553"}, {"name": "とある科学の超電磁砲", "full": "eとある科学の超電磁砲 LTRSY", "cat": "pachi", "type": "スマパチ", "series": "とある", "rate": "4P", "nos": [1], "pw": "10336"}, {"name": "とある科学の超電磁砲 最強御坂V", "full": "Pとある科学の超電磁砲 最強御坂VerRVZ", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "とある", "rate": "4P", "nos": [38], "pw": "9794"}, {"name": "にゃんこ大戦争~多様性のネコ", "full": "Pにゃんこ大戦争~多様性のネコ~M4", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [14], "pw": "10122"}, {"name": "ぱちんこ劇場版魔法少女まどか☆マギカ", "full": "Pぱちんこ劇場版魔法少女まどか☆マギカA5", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [25], "pw": "9253"}, {"name": "わんわんセレブレーション", "full": "PAわんわんセレブレーションAGBD", "cat": "pachi", "type": "甘デジ・ライト", "series": "わんわん", "rate": "4P", "nos": [28], "pw": "10089"}, {"name": "アズールレーンTHE ANIMATION~異次元トリガー199", "full": "PアズールレーンTHE ANIMATION~異次元トリガー199~M4", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "アズールレーン", "rate": "4P", "nos": [24], "pw": "10073"}, {"name": "シン・エヴァンゲリオン", "full": "Pシン・エヴァンゲリオンX", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "エヴァンゲリオン", "rate": "4P", "nos": [2], "pw": "9925"}, {"name": "スーパー海物語IN沖縄5", "full": "PAスーパー海物語IN沖縄5SBA", "cat": "pachi", "type": "甘デジ・ライト", "series": "海物語", "rate": "4P", "nos": [15], "pw": "9421"}, {"name": "デジハネモンスターハンターライズ", "full": "PデジハネモンスターハンターライズGSPB", "cat": "pachi", "type": "甘デジ・ライト", "series": "モンスターハンター", "rate": "4P", "nos": [29], "pw": "10274"}, {"name": "デジハネ北斗の拳7天破", "full": "PAデジハネ北斗の拳7天破STJB", "cat": "pachi", "type": "甘デジ・ライト", "series": "北斗の拳", "rate": "4P", "nos": [26], "pw": "8821"}, {"name": "ドラムだ!金ドン", "full": "Pドラムだ!金ドンSB", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [16], "pw": "10268"}, {"name": "フィーバーかぐや様は告らせたい", "full": "Pフィーバーかぐや様は告らせたいR", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [30], "pw": "9888"}, {"name": "フィーバークィーンII", "full": "PフィーバークィーンIIV", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "クィーン", "rate": "4P", "nos": [18], "pw": "9836"}, {"name": "フィーバー戦姫絶唱シンフォギア 黄金絶唱", "full": "Pフィーバー戦姫絶唱シンフォギア 黄金絶唱YR", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "シンフォギア", "rate": "4P", "nos": [13], "pw": "9875"}, {"name": "フィーバー機動戦士ガンダムSEED", "full": "Pフィーバー機動戦士ガンダムSEED S", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "ガンダム", "rate": "4P", "nos": [9], "pw": "9851"}, {"name": "フィーバー機動戦士ガンダムユニコーン", "full": "PAフィーバー機動戦士ガンダムユニコーンbY", "cat": "pachi", "type": "甘デジ・ライト", "series": "ガンダム", "rate": "4P", "nos": [27], "pw": "9806"}, {"name": "中森明菜・歌姫伝説極", "full": "P中森明菜・歌姫伝説極KM-TF", "cat": "pachi", "type": "ミドル・ライトミドル", "series": null, "rate": "4P", "nos": [35], "pw": "9954"}, {"name": "北斗の拳暴凶星", "full": "P北斗の拳暴凶星SFPA", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "北斗の拳", "rate": "4P", "nos": [36], "pw": "9808"}, {"name": "宇宙戦艦ヤマト2202 ONLY ONE", "full": "P宇宙戦艦ヤマト2202 ONLY ONE YR", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "宇宙戦艦ヤマト", "rate": "4P", "nos": [17], "pw": "9791"}, {"name": "牙狼11~冴島大河", "full": "P牙狼11~冴島大河~XX-MU", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "牙狼", "rate": "4P", "nos": [31], "pw": "10026"}, {"name": "真・花の慶次3", "full": "P真・花の慶次3N-K", "cat": "pachi", "type": "ミドル・ライトミドル", "series": "花の慶次", "rate": "4P", "nos": [21], "pw": "9941"}, {"name": "豊丸ととある企業の最新作2", "full": "PA豊丸ととある企業の最新作2V1", "cat": "pachi", "type": "甘デジ・ライト", "series": "とある", "rate": "4P", "nos": [19], "pw": "9918"}, {"name": "ゴーゴージャグラー3", "full": "Sゴーゴージャグラー3KA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [302, 303, 304, 305, 306], "pw": "9848"}, {"name": "アイムジャグラーEX", "full": "SアイムジャグラーEX", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [317, 318, 319, 320], "pw": "9126"}, {"name": "クランキークレスト", "full": "S/クランキークレスト/CR", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "クランキー", "rate": "20S", "nos": [327, 328, 329], "pw": "9920"}, {"name": "ジャグラーガールズ", "full": "SジャグラーガールズSS-KH", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [311, 312, 313], "pw": "10009"}, {"name": "マイジャグラーV", "full": "SマイジャグラーVKD", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [307, 308, 309], "pw": "9514"}, {"name": "ハイパーラッシュ", "full": "SハイパーラッシュSLC8", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "20S", "nos": [293, 294], "pw": "10107"}, {"name": "ハッピージャグラーVIII", "full": "SハッピージャグラーVIIIEA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [314, 315], "pw": "9705"}, {"name": "ファンキージャグラー2", "full": "Sファンキージャグラー2KT", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [300, 301], "pw": "9446"}, {"name": "いざ番長", "full": "L/いざ番長/SB8", "cat": "slot", "type": "スマスロ", "series": "番長", "rate": "20S", "nos": [269], "pw": "10275"}, {"name": "アイムジャグラーEX(緑パネル)", "full": "SアイムジャグラーEX(緑パネル)", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [316], "pw": "9126"}, {"name": "ウルトラミラクルジャグラー", "full": "SウルトラミラクルジャグラーKT", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [299], "pw": "10145"}, {"name": "エウレカセブン", "full": "S エウレカセブンHIEVO XS", "cat": "slot", "type": "AT・ART", "series": "エウレカセブン", "rate": "20S", "nos": [260], "pw": "9897"}, {"name": "ガメラ2", "full": "S ガメラ2 XR", "cat": "slot", "type": "AT・ART", "series": null, "rate": "20S", "nos": [292], "pw": "9972"}, {"name": "ゴジラ対エヴァンゲリオン", "full": "Lゴジラ対エヴァンゲリオンjA", "cat": "slot", "type": "スマスロ", "series": "エヴァンゲリオン", "rate": "20S", "nos": [273], "pw": "9990"}, {"name": "サンダーVライトニング", "full": "S/サンダーVライトニング/TH", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "20S", "nos": [323], "pw": "9155"}, {"name": "ジャジャマル", "full": "S/ジャジャマル/HA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "20S", "nos": [326], "pw": "9991"}, {"name": "スマスロマギアレコード", "full": "L/スマスロマギアレコード/RN", "cat": "slot", "type": "スマスロ", "series": null, "rate": "20S", "nos": [268], "pw": "10211"}, {"name": "スマスロ東京リベンジャーズ", "full": "L スマスロ東京リベンジャーズ ZF", "cat": "slot", "type": "スマスロ", "series": "東京リベンジャーズ", "rate": "20S", "nos": [271], "pw": "10313"}, {"name": "スーパーブラックジャック", "full": "LスーパーブラックジャックSLDC", "cat": "slot", "type": "スマスロ", "series": "ブラックジャック", "rate": "20S", "nos": [276], "pw": "10174"}, {"name": "ダンまち2", "full": "Sダンまち2XZ", "cat": "slot", "type": "AT・ART", "series": "ダンまち", "rate": "20S", "nos": [291], "pw": "10033"}, {"name": "ニューパルサーSP3", "full": "SニューパルサーSP3CC", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "パルサー", "rate": "20S", "nos": [298], "pw": "9331"}, {"name": "ネオアイムジャグラーEX", "full": "SネオアイムジャグラーEX-KK", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "20S", "nos": [321], "pw": "10269"}, {"name": "バイオハザード5", "full": "Lバイオハザード5ZE", "cat": "slot", "type": "スマスロ", "series": "バイオハザード", "rate": "20S", "nos": [270], "pw": "10217"}, {"name": "バイオハザードRE:2", "full": "SバイオハザードRE:2 XB", "cat": "slot", "type": "AT・ART", "series": "バイオハザード", "rate": "20S", "nos": [263], "pw": "9691"}, {"name": "バーサスリヴァイズ", "full": "S/バーサスリヴァイズ/HS", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "20S", "nos": [325], "pw": "9519"}, {"name": "パチスロゴッドイーターリザレクション", "full": "LパチスロゴッドイーターリザレクションSLED", "cat": "slot", "type": "スマスロ", "series": "ゴッドイーター", "rate": "20S", "nos": [272], "pw": "10086"}, {"name": "パチスロ甲鉄城のカバネリ", "full": "S パチスロ甲鉄城のカバネリ ZR", "cat": "slot", "type": "AT・ART", "series": "カバネリ", "rate": "20S", "nos": [262], "pw": "9640"}, {"name": "モンキーターン4", "full": "Sモンキーターン4ZDD", "cat": "slot", "type": "AT・ART", "series": "モンキーターン", "rate": "20S", "nos": [264], "pw": "9163"}, {"name": "モンキーターン5", "full": "Lモンキーターン5CE", "cat": "slot", "type": "スマスロ", "series": "モンキーターン", "rate": "20S", "nos": [267], "pw": "9923"}, {"name": "ワードオブライツII", "full": "S/ワードオブライツII/WF", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "20S", "nos": [324], "pw": "9967"}, {"name": "戦国恋姫", "full": "S戦国恋姫FC", "cat": "slot", "type": "AT・ART", "series": null, "rate": "20S", "nos": [295], "pw": "9854"}, {"name": "押忍!番長4", "full": "L押忍!番長4 A3", "cat": "slot", "type": "スマスロ", "series": "番長", "rate": "20S", "nos": [274], "pw": "10023"}, {"name": "押忍!番長ZERO", "full": "S押忍!番長ZERO PC1", "cat": "slot", "type": "AT・ART", "series": "番長", "rate": "20S", "nos": [258], "pw": "9539"}, {"name": "新ハナビ", "full": "S/新ハナビR/HA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ハナビ", "rate": "20S", "nos": [322], "pw": "9401"}, {"name": "新鬼武者2", "full": "S新鬼武者2ZC", "cat": "slot", "type": "AT・ART", "series": "鬼武者", "rate": "20S", "nos": [265], "pw": "9658"}, {"name": "新鬼武者3", "full": "L新鬼武者3SA", "cat": "slot", "type": "スマスロ", "series": "鬼武者", "rate": "20S", "nos": [266], "pw": "10349"}, {"name": "楽園追放", "full": "S 楽園追放 FS", "cat": "slot", "type": "AT・ART", "series": null, "rate": "20S", "nos": [297], "pw": "9433"}, {"name": "機動戦士ガンダムSEED", "full": "L機動戦士ガンダムSEED G", "cat": "slot", "type": "スマスロ", "series": "ガンダム", "rate": "20S", "nos": [275], "pw": "10255"}, {"name": "炎炎ノ消防隊", "full": "S炎炎ノ消防隊jS", "cat": "slot", "type": "AT・ART", "series": "炎炎ノ消防隊", "rate": "20S", "nos": [259], "pw": "9798"}, {"name": "甲賀忍法帖", "full": "S/甲賀忍法帖/LL", "cat": "slot", "type": "AT・ART", "series": "バジリスク", "rate": "20S", "nos": [261], "pw": "9114"}, {"name": "麻雀格闘倶楽部真", "full": "S麻雀格闘倶楽部真KS", "cat": "slot", "type": "AT・ART", "series": "麻雀格闘倶楽部", "rate": "20S", "nos": [296], "pw": "9281"}, {"name": "パチスロ甲鉄城のカバネリ", "full": "Sパチスロ甲鉄城のカバネリZR", "cat": "slot", "type": "AT・ART", "series": "カバネリ", "rate": "5S", "nos": [139, 140, 141], "pw": "9640"}, {"name": "この素晴らしい世界に祝福を!", "full": "Sこの素晴らしい世界に祝福を!ZR", "cat": "slot", "type": "AT・ART", "series": "このすば", "rate": "5S", "nos": [138, 284], "pw": "9594"}, {"name": "エウレカセブン", "full": "S エウレカセブンHIEVO XS", "cat": "slot", "type": "AT・ART", "series": "エウレカセブン", "rate": "5S", "nos": [254, 255], "pw": "9897"}, {"name": "スーパーブラックジャック", "full": "LスーパーブラックジャックSLDC", "cat": "slot", "type": "スマスロ", "series": "ブラックジャック", "rate": "5S", "nos": [150, 151], "pw": "10174"}, {"name": "ダンまち2", "full": "Sダンまち2XZ", "cat": "slot", "type": "AT・ART", "series": "ダンまち", "rate": "5S", "nos": [279, 280], "pw": "10033"}, {"name": "バイオハザードRE:2", "full": "SバイオハザードRE:2 XB", "cat": "slot", "type": "AT・ART", "series": "バイオハザード", "rate": "5S", "nos": [175, 176], "pw": "9691"}, {"name": "パチスロゴッドイーターリザレクション", "full": "LパチスロゴッドイーターリザレクションSLED", "cat": "slot", "type": "スマスロ", "series": "ゴッドイーター", "rate": "5S", "nos": [152, 153], "pw": "10086"}, {"name": "パチスロ北斗の拳", "full": "Sパチスロ北斗の拳AC LA", "cat": "slot", "type": "AT・ART", "series": "北斗の拳", "rate": "5S", "nos": [173, 174], "pw": "9300"}, {"name": "押忍!番長4", "full": "L押忍!番長4 A3", "cat": "slot", "type": "スマスロ", "series": "番長", "rate": "5S", "nos": [145, 146], "pw": "10023"}, {"name": "炎炎ノ消防隊", "full": "S炎炎ノ消防隊jS", "cat": "slot", "type": "AT・ART", "series": "炎炎ノ消防隊", "rate": "5S", "nos": [169, 170], "pw": "9798"}, {"name": "BAREXBRIGHTBA", "full": "LBAREXBRIGHTBA", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [148], "pw": "10266"}, {"name": "GIフェアリーグランプリ", "full": "SGIフェアリーグランプリKP", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "5S", "nos": [283], "pw": "9246"}, {"name": "GI優駿倶楽部黄金", "full": "LGI優駿倶楽部黄金KD", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [165], "pw": "9964"}, {"name": "OVERLORD絶対支配者光臨II", "full": "S/OVERLORD絶対支配者光臨II/SX", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [253], "pw": "9792"}, {"name": "RK1 WCC編", "full": "S RK1 WCC編YB", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [251], "pw": "9226"}, {"name": "いざ番長", "full": "L/いざ番長/SB8", "cat": "slot", "type": "スマスロ", "series": "番長", "rate": "5S", "nos": [147], "pw": "10275"}, {"name": "けものフレンズ", "full": "S けものフレンズ FS", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [247], "pw": "9615"}, {"name": "ゴーゴージャグラー3", "full": "Sゴーゴージャグラー3KA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "5S", "nos": [289], "pw": "9848"}, {"name": "スカイガールズ", "full": "SスカイガールズKK", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [250], "pw": "9093"}, {"name": "スマスロ真北斗無双", "full": "L スマスロ真北斗無双 FS", "cat": "slot", "type": "スマスロ", "series": "北斗の拳", "rate": "5S", "nos": [160], "pw": "10044"}, {"name": "スマスロ秘宝伝", "full": "L/スマスロ秘宝伝/PA7", "cat": "slot", "type": "スマスロ", "series": "秘宝伝", "rate": "5S", "nos": [162], "pw": "10390"}, {"name": "ツインエンジェルPARTY", "full": "S ツインエンジェルPARTY ZF", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [248], "pw": "9443"}, {"name": "ディスクアップ2", "full": "S ディスクアップ2 ZF", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "5S", "nos": [285], "pw": "9529"}, {"name": "ニューゲッターマウス", "full": "S/ニューゲッターマウス/CG", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "5S", "nos": [286], "pw": "9636"}, {"name": "ニューパルサーSP4", "full": "SニューパルサーSP4SLE8", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "パルサー", "rate": "5S", "nos": [287], "pw": "10019"}, {"name": "ハイパーラッシュ", "full": "SハイパーラッシュSLC8", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "5S", "nos": [282], "pw": "10107"}, {"name": "ハッピージャグラーVIII", "full": "SハッピージャグラーVIIIEA", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": "ジャグラー", "rate": "5S", "nos": [288], "pw": "9705"}, {"name": "バジリスク絆2~天膳", "full": "L/バジリスク絆2~天膳~/ZN", "cat": "slot", "type": "スマスロ", "series": "バジリスク", "rate": "5S", "nos": [164], "pw": "9944"}, {"name": "パチスロひぐらしのなく頃に祭2", "full": "Sパチスロひぐらしのなく頃に祭2PX", "cat": "slot", "type": "AT・ART", "series": "ひぐらし", "rate": "5S", "nos": [246], "pw": "9266"}, {"name": "パチスロ七つの大罪", "full": "S パチスロ七つの大罪 XS", "cat": "slot", "type": "AT・ART", "series": "七つの大罪", "rate": "5S", "nos": [134], "pw": "9241"}, {"name": "パチスロ真・一騎当千V", "full": "Lパチスロ真・一騎当千V", "cat": "slot", "type": "スマスロ", "series": "一騎当千", "rate": "5S", "nos": [142], "pw": "10116"}, {"name": "パチスロ閃乱カグラ2", "full": "Lパチスロ閃乱カグラ2L9", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [158], "pw": "10079"}, {"name": "パチスロ頭文字D", "full": "S パチスロ頭文字D XR", "cat": "slot", "type": "AT・ART", "series": "頭文字D", "rate": "5S", "nos": [245], "pw": "9271"}, {"name": "ファミスタ回胴版!!", "full": "S/ファミスタ回胴版!!/FB", "cat": "slot", "type": "AT・ART", "series": "ファミスタ", "rate": "5S", "nos": [278], "pw": "9866"}, {"name": "マジカルハロウィン", "full": "SマジカルハロウィンFP", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [249], "pw": "9438"}, {"name": "マッピー", "full": "S/マッピー/GS", "cat": "slot", "type": "ノーマル(Aタイプ)", "series": null, "rate": "5S", "nos": [256], "pw": "9545"}, {"name": "モンスターハンターライズ", "full": "LモンスターハンターライズXA", "cat": "slot", "type": "スマスロ", "series": "モンスターハンター", "rate": "5S", "nos": [161], "pw": "10138"}, {"name": "ラブ嬢3", "full": "Lラブ嬢3M4", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [159], "pw": "9928"}, {"name": "レヴュースタァライト", "full": "LレヴュースタァライトCX", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [177], "pw": "10169"}, {"name": "七つの魔剣が支配する", "full": "L七つの魔剣が支配するPU", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [168], "pw": "10177"}, {"name": "傷物語", "full": "S 傷物語 FS", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [137], "pw": "9864"}, {"name": "戦国恋姫", "full": "S戦国恋姫FC", "cat": "slot", "type": "AT・ART", "series": null, "rate": "5S", "nos": [281], "pw": "9854"}, {"name": "押忍!番長ZERO", "full": "S押忍!番長ZERO PC1", "cat": "slot", "type": "AT・ART", "series": "番長", "rate": "5S", "nos": [172], "pw": "9539"}, {"name": "新鬼武者3", "full": "L新鬼武者3SA", "cat": "slot", "type": "スマスロ", "series": "鬼武者", "rate": "5S", "nos": [149], "pw": "10349"}, {"name": "機動戦士ガンダムユニコーン", "full": "S機動戦士ガンダムユニコーンsF", "cat": "slot", "type": "AT・ART", "series": "ガンダム", "rate": "5S", "nos": [252], "pw": "9799"}, {"name": "沖ドキ!DUO", "full": "S/沖ドキ!DUO/DH", "cat": "slot", "type": "AT・ART", "series": "沖ドキ", "rate": "5S", "nos": [135], "pw": "9517"}, {"name": "沖ドキ!GOLD", "full": "S/沖ドキ!GOLD/GS", "cat": "slot", "type": "AT・ART", "series": "沖ドキ", "rate": "5S", "nos": [136], "pw": "9738"}, {"name": "甲賀忍法帖", "full": "S/甲賀忍法帖/LL", "cat": "slot", "type": "AT・ART", "series": "バジリスク", "rate": "5S", "nos": [171], "pw": "9114"}, {"name": "絶対衝激", "full": "L絶対衝激TK", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [157], "pw": "10290"}, {"name": "銭形5", "full": "L銭形5L2", "cat": "slot", "type": "スマスロ", "series": "銭形", "rate": "5S", "nos": [163], "pw": "10339"}, {"name": "防振り", "full": "L 防振り FN", "cat": "slot", "type": "スマスロ", "series": null, "rate": "5S", "nos": [133], "pw": "10036"}]};
+const RATE = {
+  pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
+  slot:[['20S','20円スロット'],['5S','5円スロット（プラスファイブ）']]
+};
+const TKEY={'甘デジ・ライト':'ama','ミドル・ライトミドル':'mid','スマパチ':'smp','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
+const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
+const M = DATA.machines.map((m,i)=>({...m,id:i}));
+let cat = location.hash==='#slot'?'slot':'pachi', rate='all', q='';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>s.normalize('NFKC').toLowerCase().replace(/\s/g,'');
+function rowHTML(m,compact){
+  return `<button class="row" data-id="${m.id}" data-r="${m.rate}">
+    <span class="name">${esc(m.name)}</span>
+    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
+    <span class="count"><b>${m.nos.length}</b><small>台</small></span>
+  </button>`;
+}
+const PAGE=M.filter(m=>m.rate==='20S'&&m.type==='スマスロ').sort((a,b)=>a.nos[0]-b.nos[0]);
+function floorRow(m){
+  return `<button class="row floor" data-id="${m.id}" data-r="${m.rate}">
+    <span class="no">${m.nos.join('<br>')}<small>番台</small></span>
+    <span class="name">${esc(m.name)}</span>
+    <span class="meta">${m.series?`<span class="ser">${esc(m.series)}シリーズ</span>`:'<span>&nbsp;</span>'}</span>
+    <span class="go" aria-hidden="true">›</span>
+  </button>`;
+}
+function render(){
+  const all=PAGE.flatMap(m=>m.nos);
+  $('#sub').textContent=`${PAGE.length}機種 ／ 台番 ${Math.min(...all)}〜${Math.max(...all)}`;
+  $('#main').innerHTML=`<section class="rate" data-r="20S"><div class="list">${PAGE.map(floorRow).join('')}</div></section>`;
+}
+function recommend(m){
+  const series=m.series?M.filter(x=>x.cat==='slot'&&x.series===m.series&&x.id!==m.id)
+    .sort((a,b)=>(b.rate==='20S')-(a.rate==='20S')||b.nos.length-a.nos.length):[];
+  const seen=new Set(series.map(x=>x.id));
+  const type=PAGE.filter(x=>x.id!==m.id&&!seen.has(x.id));
+  return {series:series.slice(0,5),type};
+}
+function openSheet(id){
+  const m=M[id]; const r=recommend(m);
+  const pw=m.pw?'https://www.p-world.co.jp/machine/database/'+m.pw:'https://www.p-world.co.jp/database/machine.html';
+  const recBlock=(cls,title,sub,list)=>list.length?`<div class="rec ${cls}"><h4>${title}</h4><p>${sub}</p><div class="list">${list.map(x=>rowHTML(x,true)).join('')}</div></div>`:'';
+  $('#sheetIn').innerHTML=`
+   <div class="sheet-head">
+    <div class="grab"></div>
+    <div class="sheet-top">
+      <div><div class="tags"><span class="tag rate">${esc(rateName(m.rate))}</span><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.series?`<span class="tag series">${esc(m.series)}シリーズ</span>`:''}</div>
+      <h3>${esc(m.name)}</h3></div>
+      <button class="close" id="close" aria-label="閉じる">×</button>
+    </div>
+   </div>
+   <div class="sheet-body">
+    <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span>${n}</span>`).join('')}</div></dd></dl>
+    <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
+    ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。ほかのレートの台も含めて、同じシリーズの台です。',r.series)}
+    ${recBlock('type-rec','ほかの20円スマスロ','同じ島にあるスマスロです。',r.type)}
+   </div>
+  `;
+  if($('#sheet').hidden){try{history.pushState({sheet:1},'')}catch(e){}}
+  $('#sheet').dataset.r=m.rate;$('#sheet').hidden=false;$('#scrim').hidden=false;$('#sheet').scrollTop=0;document.body.classList.add('lock');
+  $('#close').focus();
+}
+function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock')}
+function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
+window.addEventListener('popstate',hideSheet);
+document.addEventListener('click',e=>{
+  const row=e.target.closest('.row'); if(row){openSheet(+row.dataset.id);return}
+  if(e.target.id==='close'||e.target.id==='scrim') closeSheet();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+$('#upd').textContent=DATA.updated+' 更新';
+$('#foot').textContent='店内配置図（'+DATA.sheet+'）から自動作成';
+render();
+</script>
+</body>
+</html>
