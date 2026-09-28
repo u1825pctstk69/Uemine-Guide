@@ -15,8 +15,9 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 3. 生成された `index.html` と `smasuro20/index.html` を確認して commit / push
 4. ユーザーには、新しく追加した型式と判定結果（根拠）を一覧で伝える
 
-## 週間おすすめ台の更新
+## 週間おすすめ台（おすすめコーナー）の更新
 
+- **作業の前に必ず確認する**：ポスター画像を受け取ったら「設置機種ガイドのおすすめコーナー更新でよろしいですか？」と一度聞き、返事をもらってから進める
 - ユーザーから週のおすすめ（ポスター画像など）を受け取ったら `data/weekly.json` を書き換えて `python3 tools/update.py`（引数なし）→ commit / push
 - 形式: `{"title": 企画名, "start": "YYYY-MM-DD", "end": "YYYY-MM-DD", "items": [{"name": 配置図の型式名, "rate": 任意(4P/1P/20S/5S), "comment": 一言}]}`
 - ポスター画像がある場合は `assets/weekly/<開始日>_<名前>.jpg`（JPEG・幅640px程度）とサムネイル `_thumb.jpg` を置き、`poster` / `poster_thumb` に指定（ボタン名「おすすめコーナー」で全画面表示）
