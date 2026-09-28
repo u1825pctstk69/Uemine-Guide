@@ -1,7 +1,8 @@
 """配置図Excelからガイドページを更新する
 
 使い方:
-  python3 tools/update.py 配置図.xlsx
+  python3 tools/update.py 配置図.xlsx   … 配置図から作り直す
+  python3 tools/update.py               … 前回のデータ(data/data.json)のまま、週間おすすめ台(data/weekly.json)だけ反映
 
 1. Excelの中から「B1が入替日・D1の日付が最も新しいシート」を選ぶ
 2. tools/build.js（= gas/Code.gs と同じ解析）で機種データを作る
@@ -42,8 +43,8 @@ def dump_grid(ws):
     return grid
 
 
-def wrap(template, data_json, api, theme):
-    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api)
+def wrap(template, data_json, api, theme, weekly):
+    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly)
     title = re.search(r'<title>.*?</title>', body).group(0)
     body = body.replace(title, '', 1)
     links = re.findall(r'<link[^>]+>\n?', body)
@@ -69,27 +70,36 @@ def wrap(template, data_json, api, theme):
 
 
 def main():
-    xlsx = sys.argv[1]
-    wb = openpyxl.load_workbook(xlsx, data_only=True)
-    ws = pick_sheet(wb)
-    print('対象シート:', ws.title)
-    tmp = tempfile.mkdtemp()
-    gfile, ofile = os.path.join(tmp, 'grid.json'), os.path.join(tmp, 'data.json')
-    json.dump(dump_grid(ws), open(gfile, 'w'), ensure_ascii=False)
-    r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'build.js'), gfile,
-                        os.path.join(ROOT, 'data', 'master.csv'), ofile, ws.title])
-    if r.returncode == 2:
-        print('\n→ 未登録の型式を data/master.csv に追記してから、もう一度実行してください。')
-        sys.exit(2)
-    if r.returncode != 0:
-        sys.exit(r.returncode)
-    data = open(ofile).read()
+    data_file = os.path.join(ROOT, 'data', 'data.json')
+    if len(sys.argv) > 1:
+        wb = openpyxl.load_workbook(sys.argv[1], data_only=True)
+        ws = pick_sheet(wb)
+        print('対象シート:', ws.title)
+        tmp = tempfile.mkdtemp()
+        gfile, ofile = os.path.join(tmp, 'grid.json'), os.path.join(tmp, 'data.json')
+        json.dump(dump_grid(ws), open(gfile, 'w'), ensure_ascii=False)
+        r = subprocess.run(['node', os.path.join(ROOT, 'tools', 'build.js'), gfile,
+                            os.path.join(ROOT, 'data', 'master.csv'), ofile, ws.title])
+        if r.returncode == 2:
+            print('\n→ 未登録の型式を data/master.csv に追記してから、もう一度実行してください。')
+            sys.exit(2)
+        if r.returncode != 0:
+            sys.exit(r.returncode)
+        open(data_file, 'w').write(open(ofile).read())
+    data = open(data_file).read()
     api_file = os.path.join(ROOT, 'data', 'api_url.txt')
     api = open(api_file).read().strip() if os.path.exists(api_file) else ''
+    wk_file = os.path.join(ROOT, 'data', 'weekly.json')
+    weekly = json.dumps(json.load(open(wk_file)), ensure_ascii=False) if os.path.exists(wk_file) else 'null'
+    if weekly != 'null':
+        names = {m['name'] for m in json.loads(data)['machines']}
+        for it in json.loads(weekly).get('items', []):
+            if it['name'] not in names:
+                print('注意: 週間おすすめの機種が設置機種に見つかりません →', it['name'])
     tdir = os.path.join(ROOT, 'tools', 'templates')
-    open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030'))
+    open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030', weekly))
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
-    open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3'))
+    open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3', weekly))
     print('index.html / smasuro20/index.html を更新しました。')
 
 

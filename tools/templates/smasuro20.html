@@ -141,6 +141,20 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .row.floor .name,.row.floor .meta{grid-column:2}
 .row.floor .go{grid-row:1/span 2;grid-column:3;color:var(--rt);font-size:20px}
 .intro{font-size:13px;color:var(--muted);margin:14px 2px 0}
+.weekly{margin-top:16px;padding:14px 14px 12px;border-radius:16px;background:var(--series-s);border:1.5px solid var(--series)}
+.wk-h{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.wk-h h2{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:17px;line-height:1.35;margin:0;color:var(--series);text-wrap:balance}
+.wk-h span{font-size:12px;font-weight:700;color:var(--series);font-variant-numeric:tabular-nums}
+.wk-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}
+.wk-list::-webkit-scrollbar{display:none}
+.wk{flex:0 0 80%;max-width:300px;scroll-snap-align:start;text-align:left;border:0;border-radius:12px;background:var(--surface);padding:12px;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.wk:only-child{flex-basis:100%;max-width:none}
+.wk .nm{font-weight:700;font-size:15px;line-height:1.35}
+.wk .cm{font-size:13px;color:var(--muted);line-height:1.5}
+.wk .ft{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-top:auto}
+.wkb{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--series);color:var(--surface)}
+.wk-banner{margin:16px 0 0;padding:10px 12px;border-radius:12px;background:var(--series-s);border:1.5px solid var(--series);font-size:14px;line-height:1.5}
+.wk-banner b{display:block;color:var(--series);font-size:12px;margin-bottom:2px}
 </style>
 
 <div class="wrap">
@@ -158,6 +172,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 
 <script>
 let DATA = /*__DATA__*/;
+let WEEKLY = /*__WEEKLY__*/null; // 週間おすすめ台（data/weekly.json）
 const API = '/*__API__*/'; // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
 const RATE = {
   pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
@@ -182,14 +197,43 @@ function floorRow(m){
   return `<button class="row floor" data-id="${m.id}" data-r="${m.rate}">
     <span class="no">${m.nos.join('<br>')}<small>番台</small></span>
     <span class="name">${esc(m.name)}</span>
-    <span class="meta">${m.series?`<span class="ser">${esc(m.series)}シリーズ</span>`:'<span>&nbsp;</span>'}</span>
+    <span class="meta">${wkOf(m)?'<span class="wkb">今週のおすすめ</span>':''}${m.series?`<span class="ser">${esc(m.series)}シリーズ</span>`:(wkOf(m)?'':'<span>&nbsp;</span>')}</span>
     <span class="go" aria-hidden="true">›</span>
   </button>`;
+}
+// ===== 週間おすすめ台 =====
+const WD=['日','月','火','水','木','金','土'];
+function wkPeriod(){
+  if(!WEEKLY) return '';
+  const f=s=>{const d=new Date(s+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})`};
+  return WEEKLY.start||WEEKLY.end?`${f(WEEKLY.start)}〜${f(WEEKLY.end)}`:'';
+}
+function wkActive(){
+  if(!WEEKLY||!WEEKLY.items||!WEEKLY.items.length) return false;
+  const today=new Date();today.setHours(0,0,0,0);
+  if(WEEKLY.start&&new Date(WEEKLY.start+'T00:00:00')>today) return false;
+  if(WEEKLY.end&&new Date(WEEKLY.end+'T00:00:00')<today) return false;
+  return true;
+}
+function wkMatches(){ // [{m, comment}]
+  if(!wkActive()) return [];
+  const out=[];
+  WEEKLY.items.forEach(it=>{
+    const k=norm(it.name||'');
+    M.filter(m=>norm(m.name)===k&&(!it.rate||m.rate===it.rate)).forEach(m=>out.push({m,comment:it.comment||''}));
+  });
+  return out;
+}
+function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
+function weeklyHTML(filter){
+  const list=wkMatches().filter(w=>filter(w.m));
+  if(!list.length) return '';
+  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
 }
 function render(){
   const all=PAGE.flatMap(m=>m.nos);
   $('#sub').textContent=`${PAGE.length}機種 ／ 台番 ${Math.min(...all)}〜${Math.max(...all)}`;
-  $('#main').innerHTML=`<section class="rate" data-r="20S"><div class="list">${PAGE.map(floorRow).join('')}</div></section>`;
+  $('#main').innerHTML=weeklyHTML(m=>PAGE.includes(m))+`<section class="rate" data-r="20S"><div class="list">${PAGE.map(floorRow).join('')}</div></section>`;
 }
 function recommend(m){
   const series=m.series?M.filter(x=>x.cat==='slot'&&x.series===m.series&&x.id!==m.id)
@@ -212,6 +256,7 @@ function openSheet(id){
     </div>
    </div>
    <div class="sheet-body">
+    ${(w=>w?`<div class="wk-banner"><b>今週のおすすめ台</b>${esc(w.comment||'')}</div>`:'')(wkOf(m))}
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
     ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。ほかのレートの台も含めて、同じシリーズの台です。',r.series)}
@@ -226,13 +271,14 @@ function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.bo
 function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
 window.addEventListener('popstate',hideSheet);
 document.addEventListener('click',e=>{
+  const wk=e.target.closest('.wk'); if(wk){openSheet(+wk.dataset.id);return}
   const row=e.target.closest('.row'); if(row){openSheet(+row.dataset.id);return}
   if(e.target.id==='close'||e.target.id==='scrim') closeSheet();
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
 let pending=null;
 function applyData(d){
-  DATA=d; M=DATA.machines.map((m,i)=>({...m,id:i}));
+  DATA=d; if(d.weekly) WEEKLY=d.weekly; M=DATA.machines.map((m,i)=>({...m,id:i}));
   PAGE=M.filter(m=>m.rate==='20S'&&m.type==='スマスロ').sort((a,b)=>a.nos[0]-b.nos[0]);
   $('#upd').textContent=DATA.updated?DATA.updated+' 更新':'';
   $('#foot').textContent='店内配置図（'+DATA.sheet+'）から自動作成';
