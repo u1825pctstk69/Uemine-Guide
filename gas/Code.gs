@@ -54,7 +54,7 @@ function setup() {
   if (!ss.getSheetByName(SHEET_LAYOUT)) ss.insertSheet(SHEET_LAYOUT, 0);
   if (!ss.getSheetByName(SHEET_MASTER)) {
     const m = ss.insertSheet(SHEET_MASTER);
-    m.getRange(1, 1, 1, 5).setValues([['配置図の機種名（正式名称）', '区分', 'スペック／タイプ', 'P-WORLD機種ID', 'シリーズ（空欄なら自動）']]);
+    m.getRange(1, 1, 1, 5).setValues([['配置図の機種名（正式名称）', '区分', 'スペック／タイプ', 'P-WORLD機種ID', 'シリーズ（空欄なら自動・「-」でなし）']]);
   }
   // 「スペック／タイプ」欄は選択式にする
   const master = ss.getSheetByName(SHEET_MASTER);
@@ -302,7 +302,8 @@ function buildData_(grid, masterRows, sourceName) {
     if (!type && cat === 'slot' && /^L/.test(s)) type = 'スマスロ';
     if (!m) unknownModels[key_(s)] = { name: s, cat: cat, type: type };
     let series = m && m.series ? m.series : null;
-    if (!series) for (let i = 0; i < SERIES.length; i++) if (s.indexOf(SERIES[i][0]) >= 0) { series = SERIES[i][1]; break; }
+    if (/^[-－ー―‐]$/.test(series)) series = null; // 「-」はシリーズなし（キーワードの誤一致を防ぐ）
+    else if (!series) for (let i = 0; i < SERIES.length; i++) if (s.indexOf(SERIES[i][0]) >= 0) { series = SERIES[i][1]; break; }
     const d = { name: s, full: s, cat: cat, type: type || '確認中', series: series, rate: g.rate, nos: g.nos.sort((a, b) => a - b) };
     if (/^e/.test(s)) d.smart = true;
     if (m && /^\d+$/.test(m.pw)) d.pw = m.pw;

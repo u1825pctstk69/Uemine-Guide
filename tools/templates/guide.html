@@ -137,7 +137,8 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .weekly{margin-top:16px;padding:14px 14px 12px;border-radius:16px;background:var(--series-s);border:1.5px solid var(--series)}
 .wk-h{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
 .wk-h h2{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:17px;line-height:1.35;margin:0;color:var(--series);text-wrap:balance}
-.wk-h span{font-size:12px;font-weight:700;color:var(--series);font-variant-numeric:tabular-nums}
+.wk-h .nw{display:inline-block;font-size:inherit;font-weight:inherit;color:inherit}
+.wk-h > span{font-size:12px;font-weight:700;color:var(--series);font-variant-numeric:tabular-nums}
 .wk-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}
 .wk-list::-webkit-scrollbar{display:none}
 .wk{flex:0 0 80%;max-width:300px;scroll-snap-align:start;text-align:left;border:0;border-radius:12px;background:var(--surface);padding:12px;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
@@ -242,7 +243,7 @@ function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
 function weeklyHTML(filter){
   const list=wkMatches().filter(w=>filter(w.m)).sort((a,b)=>(b.m.cat===cat)-(a.m.cat===cat));
   if(!list.length) return '';
-  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${esc(WEEKLY.title||"今週のおすすめ台")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${(WEEKLY.title||"今週のおすすめ台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
 }
 function render(){
   document.querySelectorAll('.tab').forEach(t=>{
