@@ -213,7 +213,7 @@ const norm=s=>s.normalize('NFKC').toLowerCase().replace(/\s/g,'');
 function rowHTML(m,compact){
   return `<button class="row" data-id="${m.id}" data-r="${m.rate}">
     <span class="name">${esc(m.name)}</span>
-    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${wkOf(m)?'<span class="wkb">今週のおすすめ</span>':''}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
+    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${wkOf(m)?`<span class="wkb">${esc(wkLabel())}</span>`:''}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
     <span class="count"><b>${m.nos.length}</b><small>台</small></span>
   </button>`;
 }
@@ -224,6 +224,7 @@ function wkPeriod(){
   const f=s=>{const d=new Date(s+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})`};
   return WEEKLY.start||WEEKLY.end?`${f(WEEKLY.start)}〜${f(WEEKLY.end)}`:'';
 }
+function wkLabel(){return (WEEKLY&&WEEKLY.label)||'今週のおすすめ'}
 function wkActive(){
   if(!WEEKLY||!WEEKLY.items||!WEEKLY.items.length) return false;
   const today=new Date();today.setHours(0,0,0,0);
@@ -244,7 +245,7 @@ function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
 function weeklyHTML(filter){
   const list=wkMatches().filter(w=>filter(w.m)).sort((a,b)=>(b.m.cat===cat)-(a.m.cat===cat));
   if(!list.length) return '';
-  return `<section class="weekly" aria-label="今週のおすすめ台"><div class="wk-top"><div class="wk-h"><h2>${(WEEKLY.title||"今週のおすすめ台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+  return `<section class="weekly" aria-label="${esc(wkLabel())}台"><div class="wk-top"><div class="wk-h"><h2>${(WEEKLY.title||wkLabel()+"台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
 }
 function render(){
   document.querySelectorAll('.tab').forEach(t=>{
@@ -288,7 +289,7 @@ function openSheet(id){
     </div>
    </div>
    <div class="sheet-body">
-    ${(w=>w?`<div class="wk-banner"><b>今週のおすすめ台</b>${esc(w.comment||'')}</div>`:'')(wkOf(m))}
+    ${(w=>w?`<div class="wk-banner"><b>${esc(wkLabel())}台</b>${esc(w.comment||'')}</div>`:'')(wkOf(m))}
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
     ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。同じシリーズで打てる台です。',r.series)}
@@ -302,7 +303,7 @@ function openSheet(id){
 function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock');if(pending){const d=pending;pending=null;applyData(d)}}
 function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
 function openPoster(){
-  $('#pvImg').src=BASE+WEEKLY.poster;
+  $('#pvImg').src=BASE+WEEKLY.poster;$('#pvImg').alt=wkLabel()+'台のポスター';
   try{history.pushState({pv:1},'')}catch(e){}
   $('#pv').hidden=false;document.body.classList.add('lock');$('#pvClose').focus();
 }
