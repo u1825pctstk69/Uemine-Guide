@@ -36,7 +36,10 @@ const SERIES = [
   ['花月', '花月'], ['ゴジラ', 'ゴジラ']
 ];
 
-const SPEC_VALUES = ['甘デジ', 'ライトミドル', 'ミドル', 'ノーマル(Aタイプ)', 'AT・ART', 'スマスロ'];
+const SPEC_VALUES = ['甘デジ', 'ライトミドル', 'ミドル', '設定付き', 'ノーマル(Aタイプ)', 'AT・ART', 'スマスロ'];
+
+// 配置図に書かれていてもガイドに載せない台番号（店の指示：64番台は実在しない扱い）
+const EXCLUDE_NOS = [64];
 
 /* ===================== メニュー・初期設定 ===================== */
 
@@ -202,7 +205,7 @@ function buildFromSheets_(ss) {
   const masterRows = masterSheet && masterSheet.getLastRow() > 1
     ? masterSheet.getRange(2, 1, masterSheet.getLastRow() - 1, 5).getValues() : [];
   const sourceName = PropertiesService.getScriptProperties().getProperty('sourceName') || '';
-  return buildData_(grid, masterRows, sourceName);
+  return buildData_(grid, masterRows, sourceName, EXCLUDE_NOS);
 }
 
 function nf_(s) { return String(s == null ? '' : s).normalize('NFKC'); }
@@ -242,7 +245,8 @@ function parseLabel_(label) {
  * 配置図のグリッドから機種データを作る
  * grid: 2次元配列（シートの値） / masterRows: [型式名, 区分, スペック・タイプ, P-WORLD ID, シリーズ]
  */
-function buildData_(grid, masterRows, sourceName) {
+function buildData_(grid, masterRows, sourceName, excludeNos) {
+  const exclude = excludeNos || [];
   const cell = (r, c) => (grid[r] && grid[r][c] !== undefined ? grid[r][c] : '');
   const nRows = grid.length;
   const nCols = grid.reduce((a, row) => Math.max(a, row.length), 0);
@@ -273,7 +277,9 @@ function buildData_(grid, masterRows, sourceName) {
     const last = segs.length ? RATE_MAP[segs[segs.length - 1][0]] : '';
     names.forEach((c, i) => {
       const noRaw = best ? cell(best.rr, c) : '';
-      units.push({ name: nf_(cell(r, c)).trim(), no: isNum_(noRaw) ? +noRaw : null, rate: rateOf[i] || last });
+      const no = isNum_(noRaw) ? +noRaw : null;
+      if (no != null && exclude.indexOf(no) >= 0) return; // 載せない台番号
+      units.push({ name: nf_(cell(r, c)).trim(), no: no, rate: rateOf[i] || last });
     });
   }
 

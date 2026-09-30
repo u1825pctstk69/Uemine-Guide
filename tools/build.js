@@ -28,7 +28,7 @@ const [gridFile, masterFile, outFile, sourceName] = process.argv.slice(2);
 const grid = JSON.parse(fs.readFileSync(gridFile, 'utf8')).map(r => r.map(v => (v && v.__date ? new Date(v.__date) : v)));
 const master = readCsv(masterFile).slice(1).filter(r => r[0])
   .map(r => [r[0], r[1] === 'pachi' ? 'パチンコ' : r[1] === 'slot' ? 'スロット' : r[1], r[2], r[3], r[4]]);
-const data = buildData_(grid, master, sourceName || '');
+const data = buildData_(grid, master, sourceName || '', EXCLUDE_NOS);
 const unknown = data.unknownModels;
 delete data.unknownModels;
 fs.writeFileSync(outFile, JSON.stringify(data));

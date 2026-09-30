@@ -98,6 +98,7 @@ section.rate{margin-top:20px}
 .type[data-t="ama"]{background:var(--t-amas);color:var(--t-ama)}
 .type[data-t="mid"]{background:var(--t-mids);color:var(--t-mid)}
 .type[data-t="lmid"]{background:var(--t-smps);color:var(--t-smp)}
+.type[data-t="set"]{background:var(--r5s);color:var(--r5t)}
 .sp{font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;border:1px solid var(--t-smp);color:var(--t-smp)}
 .type[data-t="a"]{background:var(--t-as);color:var(--t-a)}
 .type[data-t="at"]{background:var(--t-ats);color:var(--t-at)}
@@ -202,7 +203,7 @@ const RATE = {
   pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
   slot:[['20S','20円スロット'],['5S','5円スロット（プラスファイブ）']]
 };
-const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
+const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','設定付き':'set','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
 const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
 let M = [];
 let cat = location.hash==='#slot'?'slot':'pachi', rate='all', q='';
