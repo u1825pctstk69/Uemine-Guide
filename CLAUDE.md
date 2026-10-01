@@ -79,8 +79,11 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 - WebアプリURLが決まったら `data/api_url.txt` に書いて `tools/update.py` を再実行
 - 解析ロジックを変えるときは `gas/Code.gs` を直す（Node側も同じコードを使う）
 
-## 予約公開（構築中・2026-09-30時点）
+## 予約公開（2026-10-01 稼働）
 
-- 方式（ユーザー承認済み）: 公開前の内容は非公開リポジトリ `Uemine-Guide-staging` に置く。そのリポジトリの GitHub Actions が日付変更後（0:05 JST、予備で数回再実行）に公開リポジトリ（本リポジトリ）の main へ反映する。公開前の内容が外から見えないことが必須。10:00開店までに反映されればよい
-- トリプルチェックは予約の準備時（staging に置く前）に行う
-- 状況: ユーザー側で①非公開リポジトリ作成 ②本リポジトリの Contents 書き込み権限だけを持つ Fine-grained トークン作成 ③staging の Actions シークレット `PUBLIC_REPO_TOKEN` に登録 → 完了連絡待ち。その後 Claude が staging を add_repo してワークフローを作成・テストする
+- 公開前の内容は非公開リポジトリ `u1825pctstk69/Uemine-Guide-staging` に置く（**本リポジトリは公開なので、公開日前の内容を commit / push しない**）。詳細はそのリポジトリの README.md
+- staging の GitHub Actions が 0:05 JST（予備 0:35 / 2:05 / 5:05）に、日付が来た `scheduled/<YYYY-MM-DD>/` を本リポジトリにコピー → `tools/update.py` → push。済んだものは `published/` へ移る。10:00開店までに反映されればよい
+- 準備後に本リポジトリの同じファイルが変更されていたら、上書き防止のため公開を中止（失敗メールが届く）→ 作り直して置き直す
+- 手順: 本リポジトリの作業コピーで変更（commit しない）→ トリプルチェック → `python3 ../uemine-guide-staging/tools/stage.py <公開日> . [メモ]` → 本リポジトリの変更を取り消す（`git checkout -- . && git clean -fd`）→ staging を commit / push → push時の確認実行が成功したか確認（ログは取得できないので check-runs の annotations で見る）
+- ユーザーが日付を指定せずに頼んだ場合は即時公開（従来どおり本リポジトリに push）。予約か即時か迷うときは確認する
+- 書き込み用トークン: staging の Actions シークレット `PUBLIC_REPO_TOKEN`（本リポジトリの Contents 書き込みのみ）。**期限 2027-09-30**。期限前にユーザーへ作り直しを案内する
