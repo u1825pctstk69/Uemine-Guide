@@ -215,12 +215,14 @@ const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','設
 const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
 let M = [];
 const SEAT = (v=>/^\d{1,4}$/.test(v)&&+v>0?+v:0)(new URLSearchParams(location.search).get('no')||''); // 台のQR（?no=台番号）
-let cat = location.hash==='#pachi'?'pachi':'slot', rate=location.hash?'all':'5S', q='', notice='';
+const START = (s=>s==='slot'?'slot':'pachi')('/*__START__*/'); // 番号なしで開いたときの最初の画面（data/dai.json の start）
+const hashCat = () => location.hash==='#pachi'?'pachi':location.hash==='#slot'?'slot':START;
+let cat = hashCat(), rate='all', q='', notice='';
 // ===== アクセス記録（個人を特定する情報は送らない） =====
 let SID='';try{SID=sessionStorage.getItem('sid')||'';if(!SID){SID=Math.random().toString(36).slice(2,10);sessionStorage.setItem('sid',SID)}}catch(e){}
 function log(ev,m,no){
   if(!LOG) return;
-  const p=new URLSearchParams({ev,sid:SID,page:'p5'});
+  const p=new URLSearchParams({ev,sid:SID,page:'dai'});
   if(m){p.set('name',m.name);p.set('rate',m.rate)}
   if(no) p.set('no',no);
   try{fetch(LOG+'?'+p,{mode:'no-cors',keepalive:true}).catch(()=>{})}catch(e){}
@@ -347,7 +349,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#pv').hidden)closePoster();else closeSheet()}});
 $('#q').addEventListener('input',e=>{q=e.target.value;render()});
-window.addEventListener('hashchange',()=>{cat=location.hash==='#pachi'?'pachi':'slot';render()});
+window.addEventListener('hashchange',()=>{cat=hashCat();render()});
 let pending=null;
 function applyData(d){
   DATA=d; if(d.weekly) WEEKLY=d.weekly; M=DATA.machines.map((m,i)=>({...m,id:i}));
