@@ -87,3 +87,13 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 - 手順: 本リポジトリの作業コピーで変更（commit しない）→ トリプルチェック → `python3 ../uemine-guide-staging/tools/stage.py <公開日> . [メモ]` → 本リポジトリの変更を取り消す（`git checkout -- . && git clean -fd`）→ staging を commit / push → push時の確認実行が成功したか確認（ログは取得できないので check-runs の annotations で見る）
 - ユーザーが日付を指定せずに頼んだ場合は即時公開（従来どおり本リポジトリに push）。予約か即時か迷うときは確認する
 - 書き込み用トークン: staging の Actions シークレット `PUBLIC_REPO_TOKEN`（本リポジトリの Contents 書き込みのみ）。**期限 2027-09-30**。期限前にユーザーへ作り直しを案内する
+
+## お試し: 台のQR用ページ p5/（2026-10-05 公開・試験中）
+
+- URL: https://u1825pctstk69.github.io/Uemine-Guide/p5/?no=<台番号>。台のQRから開くとその台の機種詳細を表示（その台番号を強調）。番号なしは5円一覧
+- まずプラスファイブ（5S）全62台にQRを貼る（ユーザー選択A）。印刷用PDFは台番号順・1ページ20枚（A4、QR約32mm）。QRには台番号だけを入れているので、入替・台移動があってもQRの貼り替えは不要（データ更新で自動追従）
+- 推し機種投票（data/vote.json。GASのランキングページ、常設）へのボタンを、5S機種の詳細画面と5円一覧の上に表示
+- アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**未設定の間は何も送信しない**（ユーザー側の設置待ち）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
+- 既存ページ（index.html・smasuro20）は一切変えていない。テンプレートは tools/templates/p5.html（guide.html のコピー）、作業ブランチ trial/plus5
+- **取り消し方**: main の取り込みコミット「お試し p5（台のQR用ページ）を取り込み」を `git revert -m 1 <そのコミット>` → push。お試し前の状態はコミット e1b392c
+- 本採用になったら、guide.html への統合と、p5/ を残すか（印刷済みQRのため残す必要あり）を決める
