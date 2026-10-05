@@ -1,0 +1,372 @@
+<title>上峰店 設置機種ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#151B2E; --muted:#5B6275; --line:#E0E3EC; --chip:#EEF0F6;
+  --hero:#B01030; --hero2:#7A0A22; --hero-ink:#FFFFFF; --gold:#FFD166; --field:#FFFFFF;
+  --pachi:#C8102E; --slot:#2F5BD3;
+  --r4:#D62839; --r4s:#FDE8EB; --r4t:#B31B2C;
+  --r1:#F07B0F; --r1s:#FFF0E0; --r1t:#B45400;
+  --r20:#2F5BD3; --r20s:#E6EDFD; --r20t:#2548AE;
+  --r5:#0F9D8A; --r5s:#DFF5F1; --r5t:#0A7466;
+  --t-ama:#2E7D32; --t-amas:#E4F4E4; --t-mid:#B0173A; --t-mids:#FCE6EB; --t-smp:#6B3FB8; --t-smps:#EFE8FB;
+  --t-a:#8A5A00; --t-as:#FFF2D2; --t-at:#2A4FB0; --t-ats:#E5ECFC; --t-sms:#A1257D; --t-smss:#FBE6F5;
+  --series:#8A5A00; --series-s:#FFF2D2;
+  --shadow:0 -8px 30px rgba(21,27,46,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F1320; --surface:#181D2C; --ink:#ECEEF5; --muted:#A1A8BC; --line:#2A3144; --chip:#232A3C;
+    --hero:#7E0B22; --hero2:#4A0614; --field:#232A3C;
+    --pachi:#E0314D; --slot:#4C78F0;
+    --r4:#FF5A6B; --r4s:#3A1C24; --r4t:#FF8A96;
+    --r1:#FF9A3D; --r1s:#3A2814; --r1t:#FFB36B;
+    --r20:#6E93FF; --r20s:#1C2748; --r20t:#9DB5FF;
+    --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
+    --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
+    --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
+    --series:#F2C35E; --series-s:#3A2E14;
+    --shadow:0 -8px 30px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F1320; --surface:#181D2C; --ink:#ECEEF5; --muted:#A1A8BC; --line:#2A3144; --chip:#232A3C;
+  --hero:#7E0B22; --hero2:#4A0614; --field:#232A3C;
+  --pachi:#E0314D; --slot:#4C78F0;
+  --r4:#FF5A6B; --r4s:#3A1C24; --r4t:#FF8A96;
+  --r1:#FF9A3D; --r1s:#3A2814; --r1t:#FFB36B;
+  --r20:#6E93FF; --r20s:#1C2748; --r20t:#9DB5FF;
+  --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
+  --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
+  --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
+  --series:#F2C35E; --series-s:#3A2E14;
+  --shadow:0 -8px 30px rgba(0,0,0,.5);
+}
+[data-r="4P"]{--rc:var(--r4);--rs:var(--r4s);--rt:var(--r4t)}
+[data-r="1P"]{--rc:var(--r1);--rs:var(--r1s);--rt:var(--r1t)}
+[data-r="20S"]{--rc:var(--r20);--rs:var(--r20s);--rt:var(--r20t)}
+[data-r="5S"]{--rc:var(--r5);--rs:var(--r5s);--rt:var(--r5t)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body.lock{overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:0 40px}
+header{margin-inline:-16px;padding:16px 16px 18px;color:var(--hero-ink);border-radius:0 0 22px 22px;
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 14px,transparent 14px 28px),
+    linear-gradient(160deg,var(--hero),var(--hero2))}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand small{font-size:12px;opacity:.85;letter-spacing:.08em}
+h1{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:26px;margin:4px 0 14px;letter-spacing:.02em}
+h1 span{color:var(--gold)}
+input[type=search]{width:100%;font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:0;background:var(--field);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.stick{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-16px;padding:10px 16px 10px;border-bottom:1px solid var(--line)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--chip);padding:4px;border-radius:12px}
+.tab{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;padding:10px 8px;border-radius:9px;cursor:pointer;display:flex;justify-content:center;gap:8px;align-items:baseline}
+.tab .n{font-size:12px;font-weight:500;font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"]{color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+#tab-pachi[aria-selected="true"]{background:var(--pachi)}
+#tab-slot[aria-selected="true"]{background:var(--slot)}
+.tools{padding-top:8px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;appearance:none;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:500;min-height:38px;padding:6px 14px;border-radius:999px;cursor:pointer}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--rc)}
+.chip[data-r]{border-color:var(--rc)}
+.chip[aria-pressed="true"]{background:var(--rc,var(--ink));border-color:var(--rc,var(--ink));color:#fff}
+.chip[aria-pressed="true"][data-rate="all"]{background:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"] i{background:#fff}
+button:focus-visible,input:focus-visible,a:focus-visible,.row:focus-visible{outline:2px solid var(--pachi);outline-offset:2px}
+section.rate{margin-top:20px}
+.rate-h{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 2px 8px}
+.rate-h h2{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:15px;margin:0;background:var(--rc);color:#fff;padding:5px 14px;border-radius:999px;letter-spacing:.03em}
+.rate-h span{font-size:12px;color:var(--rt);font-weight:700;font-variant-numeric:tabular-nums}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:center;padding:12px 14px;border-top:1px solid var(--line);cursor:pointer;background:var(--surface);width:100%;text-align:left;font:inherit;color:inherit;border-left:0;border-right:0;border-bottom:0}
+.list .row:first-child{border-top:0}
+.row:hover,.row:active{background:var(--rs)}
+.name{font-weight:700;font-size:15px;line-height:1.35}
+.meta{grid-column:1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:12px;color:var(--muted)}
+.meta .ser{color:var(--series)}
+.count{grid-row:1/span 2;grid-column:2;display:grid;place-items:center;min-width:44px;height:44px;border-radius:12px;background:var(--rs);color:var(--rt);font-variant-numeric:tabular-nums;line-height:1}
+.count b{font-size:18px}
+.count small{font-size:10px;margin-top:-10px}
+.type{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;background:var(--chip);color:var(--ink)}
+.type[data-t="ama"]{background:var(--t-amas);color:var(--t-ama)}
+.type[data-t="mid"]{background:var(--t-mids);color:var(--t-mid)}
+.type[data-t="lmid"]{background:var(--t-smps);color:var(--t-smp)}
+.type[data-t="set"]{background:var(--r5s);color:var(--r5t)}
+.sp{font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;border:1px solid var(--t-smp);color:var(--t-smp)}
+.type[data-t="a"]{background:var(--t-as);color:var(--t-a)}
+.type[data-t="at"]{background:var(--t-ats);color:var(--t-at)}
+.type[data-t="sms"]{background:var(--t-smss);color:var(--t-sms)}
+.empty{padding:28px 16px;text-align:center;color:var(--muted)}
+footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
+/* detail sheet */
+.scrim{position:fixed;inset:0;background:rgba(10,14,24,.5);z-index:10}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:11;max-height:88vh;max-height:88dvh;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-radius:20px 20px 0 0;box-shadow:var(--shadow);padding:0 0 calc(24px + env(safe-area-inset-bottom,0px))}
+.sheet-in{max-width:640px;margin:0 auto}
+.sheet-head{background:var(--rs);padding:10px 16px 16px;border-radius:20px 20px 0 0}
+.sheet-body{padding:0 16px}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--rc);opacity:.5;margin:0 auto 12px}
+.sheet-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.close{appearance:none;border:0;background:var(--surface);color:var(--ink);width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;flex:none;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.sheet h3{font-size:21px;line-height:1.35;margin:8px 0 0;text-wrap:balance}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;background:var(--surface)}
+.tag.rate{background:var(--rc);color:#fff}
+.tag.series{background:var(--series-s);color:var(--series)}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:16px 0;font-size:14px;align-items:start}
+.facts dt{color:var(--muted);padding-top:2px}
+.facts dd{margin:0;font-variant-numeric:tabular-nums}
+.facts dd b{color:var(--rt);font-size:18px}
+.nos{display:flex;flex-wrap:wrap;gap:5px}
+.nos span{border:1.5px solid var(--rc);color:var(--rt);border-radius:7px;padding:1px 8px;font-size:13px;font-weight:700}
+.nos span.me{background:var(--rc);color:#fff}
+.mine{margin:14px 0 0;padding:10px 12px;border-radius:12px;background:var(--rs);color:var(--rt);font-weight:700;font-size:14px}
+.vote{display:flex;align-items:center;gap:10px;text-decoration:none;margin:12px 0 0;padding:12px 14px;border-radius:12px;border:2px solid var(--r5);background:var(--r5s);color:var(--r5t)}
+.vote b{display:block;font-size:15px}.vote small{display:block;font-size:12px;font-weight:400;opacity:.9}.vote .ar{margin-left:auto;font-size:18px}
+.rate .vote{margin:0 0 10px}
+.notice{margin:0 0 14px;padding:10px 12px;border-radius:12px;background:var(--rs,#f3f3f3);font-size:14px}
+.cta{display:flex;justify-content:center;align-items:center;gap:8px;text-decoration:none;background:var(--rc);color:#fff;font-weight:700;padding:14px;border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.rec{margin-top:24px}
+.rec h4{font-size:14px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.rec h4::before{content:"";width:6px;height:16px;border-radius:3px;background:var(--hd)}
+.rec.series-rec{--hd:var(--series)}
+.rec.type-rec{--hd:var(--rc)}
+.rec p{font-size:12px;color:var(--muted);margin:0 0 8px}
+.rec .list{border-radius:12px}
+.rec .row{padding:10px 12px}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:up .22s ease-out}@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}}
+.weekly{margin-top:16px;padding:14px 14px 12px;border-radius:16px;background:var(--series-s);border:1.5px solid var(--series)}
+.wk-h{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.wk-h h2{font-family:"Dela Gothic One","Zen Kaku Gothic New",sans-serif;font-weight:400;font-size:17px;line-height:1.35;margin:0;color:var(--series);text-wrap:balance}
+.wk-h .nw{display:inline-block;font-size:inherit;font-weight:inherit;color:inherit}
+.wk-h > span{font-size:12px;font-weight:700;color:var(--series);font-variant-numeric:tabular-nums}
+.wk-list{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;scrollbar-width:none}
+.wk-list::-webkit-scrollbar{display:none}
+.wk{flex:0 0 80%;max-width:300px;scroll-snap-align:start;text-align:left;border:0;border-radius:12px;background:var(--surface);padding:12px;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.wk:only-child{flex-basis:100%;max-width:none}
+.wk .nm{font-weight:700;font-size:15px;line-height:1.35}
+.wk .cm{font-size:13px;color:var(--muted);line-height:1.5}
+.wk .ft{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-top:auto}
+.wkb{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--series);color:var(--surface)}
+.wk-banner{margin:16px 0 0;padding:10px 12px;border-radius:12px;background:var(--series-s);border:1.5px solid var(--series);font-size:14px;line-height:1.5}
+.wk-banner b{display:block;color:var(--series);font-size:12px;margin-bottom:2px}
+.wk-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.wk-pbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;font:inherit;font-size:11px;font-weight:700;color:var(--series);cursor:pointer}
+.wk-pbtn img{width:52px;height:74px;object-fit:cover;border-radius:6px;border:1.5px solid var(--series);display:block;background:var(--surface)}
+.pv{position:fixed;inset:0;z-index:20;background:rgba(8,10,18,.92);display:flex;align-items:center;justify-content:center;padding:calc(56px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.pv img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.pv .close{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px}
+/* PC・タブレットなど横幅の広い画面（スマホの表示は変わらない） */
+@media (min-width:900px){
+  .wrap{zoom:1.15;max-width:1080px}
+  main .list{display:grid;grid-template-columns:1fr 1fr}
+  main .list .row:nth-child(2){border-top:0}
+  main .list .row:nth-child(even){border-left:1px solid var(--line)}
+  .wk{flex-basis:calc(50% - 5px);max-width:none}
+  .wk:only-child{flex-basis:100%}
+  .sheet{zoom:1.15;max-height:calc(88vh / 1.15);left:0;right:0;margin:0 auto;max-width:720px}
+}
+@media (min-width:1400px){
+  .wrap{zoom:1.3;max-width:1100px}
+  .sheet{zoom:1.3;max-height:calc(88vh / 1.3)}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><small>コトブキプラス上峰店</small><small id="upd"></small></div>
+    <h1>設置機種<span>ガイド</span></h1>
+    <div class="search"><input type="search" id="q" placeholder="機種名で探す" aria-label="機種名で探す" enterkeyhint="search"></div>
+  </header>
+  <div class="stick">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tab-pachi" data-cat="pachi">パチンコ<span class="n"></span></button>
+      <button class="tab" role="tab" id="tab-slot" data-cat="slot">スロット<span class="n"></span></button>
+    </div>
+    <div class="tools">
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+  <main id="main"></main>
+  <footer id="foot"></footer>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="pv" id="pv" role="dialog" aria-modal="true" aria-label="ポスター" hidden><img id="pvImg" alt="今週のおすすめ台のポスター"><button class="close" id="pvClose" aria-label="閉じる">×</button></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="sheet-in" id="sheetIn"></div></div>
+
+<script>
+let DATA = /*__DATA__*/;
+let WEEKLY = /*__WEEKLY__*/null;
+const BASE = '../'; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
+const API = '/*__API__*/';
+const VOTE = /*__VOTE__*/null; // 推し機種投票（data/vote.json）
+const LOG = '/*__LOG__*/'; // アクセス記録の送り先（data/log_url.txt）。空なら記録しない // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
+const RATE = {
+  pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
+  slot:[['20S','20円スロット'],['5S','5円スロット（プラスファイブ）']]
+};
+const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','設定付き':'set','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
+const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
+let M = [];
+const SEAT = (v=>/^\d{1,4}$/.test(v)&&+v>0?+v:0)(new URLSearchParams(location.search).get('no')||''); // 台のQR（?no=台番号）
+let cat = location.hash==='#pachi'?'pachi':'slot', rate=location.hash?'all':'5S', q='', notice='';
+// ===== アクセス記録（個人を特定する情報は送らない） =====
+let SID='';try{SID=sessionStorage.getItem('sid')||'';if(!SID){SID=Math.random().toString(36).slice(2,10);sessionStorage.setItem('sid',SID)}}catch(e){}
+function log(ev,m,no){
+  if(!LOG) return;
+  const p=new URLSearchParams({ev,sid:SID,page:'p5'});
+  if(m){p.set('name',m.name);p.set('rate',m.rate)}
+  if(no) p.set('no',no);
+  try{fetch(LOG+'?'+p,{mode:'no-cors',keepalive:true}).catch(()=>{})}catch(e){}
+}
+function voteHTML(){
+  if(!VOTE||!VOTE.url) return '';
+  return `<a class="vote" href="${esc(VOTE.url)}" target="_blank" rel="noopener"><span><b>${esc(VOTE.title||'推し機種ランキング')}</b><small>${esc(VOTE.sub||'推し機種に1票を投票できます')}</small></span><span class="ar">↗</span></a>`;
+}
+const voteFor = r => VOTE&&VOTE.url&&(VOTE.rates||[]).includes(r);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>s.normalize('NFKC').toLowerCase().replace(/\s/g,'');
+function rowHTML(m,compact){
+  return `<button class="row" data-id="${m.id}" data-r="${m.rate}">
+    <span class="name">${esc(m.name)}</span>
+    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${wkOf(m)?`<span class="wkb">${esc(wkLabel())}</span>`:''}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
+    <span class="count"><b>${m.nos.length}</b><small>台</small></span>
+  </button>`;
+}
+// ===== 週間おすすめ台 =====
+const WD=['日','月','火','水','木','金','土'];
+function wkPeriod(){
+  if(!WEEKLY) return '';
+  const f=s=>{const d=new Date(s+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})`};
+  return WEEKLY.start||WEEKLY.end?`${f(WEEKLY.start)}〜${f(WEEKLY.end)}`:'';
+}
+function wkLabel(){return (WEEKLY&&WEEKLY.label)||'今週のおすすめ'}
+function wkActive(){
+  if(!WEEKLY||!WEEKLY.items||!WEEKLY.items.length) return false;
+  const today=new Date();today.setHours(0,0,0,0);
+  if(WEEKLY.start&&new Date(WEEKLY.start+'T00:00:00')>today) return false;
+  if(WEEKLY.end&&new Date(WEEKLY.end+'T00:00:00')<today) return false;
+  return true;
+}
+function wkMatches(){ // [{m, comment}]
+  if(!wkActive()) return [];
+  const out=[];
+  WEEKLY.items.forEach(it=>{
+    const k=norm(it.name||'');
+    M.filter(m=>norm(m.name)===k&&(!it.rate||m.rate===it.rate)).forEach(m=>out.push({m,comment:it.comment||''}));
+  });
+  return out;
+}
+function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
+function weeklyHTML(filter){
+  const list=wkMatches().filter(w=>filter(w.m)).sort((a,b)=>(b.m.cat===cat)-(a.m.cat===cat));
+  if(!list.length) return '';
+  return `<section class="weekly" aria-label="${esc(wkLabel())}台"><div class="wk-top"><div class="wk-h"><h2>${(WEEKLY.title||wkLabel()+"台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+}
+function render(){
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.setAttribute('aria-selected',t.dataset.cat===cat);
+    t.querySelector('.n').textContent=M.filter(m=>m.cat===t.dataset.cat).reduce((a,m)=>a+m.nos.length,0)+'台';
+  });
+  const rates=RATE[cat].filter(([r])=>M.some(m=>m.cat===cat&&m.rate===r));
+  if(rate!=='all'&&!rates.some(([r])=>r===rate)) rate='all';
+  $('#chips').innerHTML=[['all','すべて']].concat(rates).map(([r,l])=>`<button class="chip" data-rate="${r}" ${r==='all'?'':`data-r="${r}"`} aria-pressed="${r===rate}">${r==='all'?'':'<i></i>'}${l.replace(/パチンコ|スロット/,'')}</button>`).join('');
+  const qq=norm(q);
+  let html='';
+  for(const [r,l] of rates){
+    if(rate!=='all'&&r!==rate) continue;
+    const list=M.filter(m=>m.cat===cat&&m.rate===r&&(!qq||norm(m.name+m.full+(m.series||'')).includes(qq)));
+    if(!list.length) continue;
+    const units=list.reduce((a,m)=>a+m.nos.length,0);
+    html+=`<section class="rate" data-r="${r}"><div class="rate-h"><h2>${l}</h2><span>${list.length}機種 / ${units}台</span></div>${voteFor(r)?voteHTML():''}<div class="list">${list.map(m=>rowHTML(m)).join('')}</div></section>`;
+  }
+  $('#main').innerHTML=(notice?`<div class="notice">${esc(notice)}</div>`:'')+(qq?'':weeklyHTML(()=>true))+(html||`<div class="empty">「${esc(q)}」に一致する機種はありません</div>`);
+}
+function recommend(m){
+  const pool=M.filter(x=>x.cat===m.cat&&x.id!==m.id);
+  const byUnits=(a,b)=>(b.rate===m.rate)-(a.rate===m.rate)||b.nos.length-a.nos.length;
+  const series=m.series?pool.filter(x=>x.series===m.series).sort(byUnits):[];
+  const seen=new Set(series.map(x=>x.name));
+  const type=pool.filter(x=>m.type!=='確認中'&&x.type===m.type&&!seen.has(x.name)).sort(byUnits);
+  const uniq=a=>{const s=new Set();return a.filter(x=>!s.has(x.name+x.rate)&&s.add(x.name+x.rate))};
+  return {series:uniq(series).slice(0,5),type:uniq(type).slice(0,5)};
+}
+function openSheet(id,seat){
+  const m=M[id]; const r=recommend(m);
+  const pw=m.pw?'https://www.p-world.co.jp/machine/database/'+m.pw:'https://www.p-world.co.jp/database/machine.html';
+  const recBlock=(cls,title,sub,list)=>list.length?`<div class="rec ${cls}"><h4>${title}</h4><p>${sub}</p><div class="list">${list.map(x=>rowHTML(x,true)).join('')}</div></div>`:'';
+  $('#sheetIn').innerHTML=`
+   <div class="sheet-head">
+    <div class="grab"></div>
+    <div class="sheet-top">
+      <div><div class="tags"><span class="tag rate">${esc(rateName(m.rate))}</span><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${m.series?`<span class="tag series">${esc(m.series)}シリーズ</span>`:''}</div>
+      <h3>${esc(m.name)}</h3></div>
+      <button class="close" id="close" aria-label="閉じる">×</button>
+    </div>
+   </div>
+   <div class="sheet-body">
+    ${(w=>w?`<div class="wk-banner"><b>${esc(wkLabel())}台</b>${esc(w.comment||'')}</div>`:'')(wkOf(m))}
+    ${seat?`<div class="mine">${seat}番台の機種です</div>`:''}
+    <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span${n===seat?' class="me"':''}>${n}</span>`).join('')}</div></dd></dl>
+    <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
+    ${voteFor(m.rate)?voteHTML():''}
+    ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。同じシリーズで打てる台です。',r.series)}
+    ${recBlock('type-rec',(m.cat==='pachi'?`同じスペックの台（${esc(m.type)}）`:`同じタイプの台（${esc(m.type)}）`),'遊び方の近い台です。同じレートの台を先に並べています。',r.type)}
+   </div>
+  `;
+  if($('#sheet').hidden){try{history.pushState({sheet:1},'')}catch(e){}}
+  $('#sheet').dataset.r=m.rate;$('#sheet').dataset.id=id;$('#sheet').hidden=false;$('#scrim').hidden=false;$('#sheet').scrollTop=0;document.body.classList.add('lock');
+  $('#close').focus();
+}
+function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock');if(pending){const d=pending;pending=null;applyData(d)}}
+function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
+function openPoster(){
+  $('#pvImg').src=BASE+WEEKLY.poster;$('#pvImg').alt=wkLabel()+'台のポスター';
+  try{history.pushState({pv:1},'')}catch(e){}
+  $('#pv').hidden=false;document.body.classList.add('lock');$('#pvClose').focus();
+}
+function hidePoster(){$('#pv').hidden=true;if($('#sheet').hidden)document.body.classList.remove('lock')}
+function closePoster(){if($('#pv').hidden)return;if(history.state&&history.state.pv){history.back()}else{hidePoster()}}
+window.addEventListener('popstate',()=>{if(!$('#pv').hidden){hidePoster();return}hideSheet()});
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.tab'); if(t){cat=t.dataset.cat;rate='all';history.replaceState(null,'','#'+cat);render();return}
+  const c=e.target.closest('.chip'); if(c){rate=c.dataset.rate;render();return}
+  if(e.target.closest('#wkPoster')){openPoster();return}
+  if(e.target.id==='pvClose'||e.target.id==='pv'){closePoster();return}
+  if(e.target.closest('.vote')){log('vote',$('#sheet').hidden?null:M[+$('#sheet').dataset.id]);return}
+  const wk=e.target.closest('.wk'); if(wk){openSheet(+wk.dataset.id);log('view',M[+wk.dataset.id]);return}
+  const row=e.target.closest('.row'); if(row){openSheet(+row.dataset.id);log('view',M[+row.dataset.id]);return}
+  if(e.target.id==='close'||e.target.id==='scrim') closeSheet();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#pv').hidden)closePoster();else closeSheet()}});
+$('#q').addEventListener('input',e=>{q=e.target.value;render()});
+window.addEventListener('hashchange',()=>{cat=location.hash==='#pachi'?'pachi':'slot';render()});
+let pending=null;
+function applyData(d){
+  DATA=d; if(d.weekly) WEEKLY=d.weekly; M=DATA.machines.map((m,i)=>({...m,id:i}));
+  $('#upd').textContent=DATA.updated?DATA.updated+' 更新':'';
+  $('#foot').textContent='店内配置図（'+DATA.sheet+'）から自動作成'+(LOG?'。サービス改善のため、閲覧した台番号・機種と日時を記録しています（個人を特定する情報は記録しません）':'');
+  render();
+}
+applyData(DATA);
+// 台のQRから開いたとき：その台の機種をすぐ表示
+if(SEAT){
+  const m=M.find(x=>x.nos.includes(SEAT));
+  if(m){cat=m.cat;rate=m.rate;render();openSheet(m.id,SEAT);log('qr',m,SEAT)}
+  else{notice=SEAT+'番台の情報が見つかりませんでした。一覧から機種をお探しください。';render();log('qr',null,SEAT)}
+}else log('open');
+// 最新データをスプレッドシートから読み込む（失敗したら埋め込みデータのまま）
+if(API){
+  fetch(API,{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
+    if(!d||!d.machines||!d.machines.length) return;
+    if($('#sheet').hidden) applyData(d); else pending=d;
+  }).catch(()=>{});
+}
+</script>

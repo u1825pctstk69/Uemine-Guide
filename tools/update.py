@@ -101,6 +101,18 @@ def main():
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
     open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3', weekly))
     print('index.html / smasuro20/index.html を更新しました。')
+    # お試し: 台のQR用ページ（p5/）。テンプレートがあるときだけ作る
+    p5 = os.path.join(tdir, 'p5.html')
+    if os.path.exists(p5):
+        vf = os.path.join(ROOT, 'data', 'vote.json')
+        vote = json.dumps(json.load(open(vf)), ensure_ascii=False) if os.path.exists(vf) else 'null'
+        lf = os.path.join(ROOT, 'data', 'log_url.txt')
+        logu = open(lf).read().strip() if os.path.exists(lf) else ''
+        t = open(p5).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/', logu)
+        os.makedirs(os.path.join(ROOT, 'p5'), exist_ok=True)
+        html = wrap(t, data, api, '#0F9D8A', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+        open(os.path.join(ROOT, 'p5', 'index.html'), 'w').write(html)
+        print('p5/index.html（お試し・台のQR用）を更新しました。')
 
 
 if __name__ == '__main__':
