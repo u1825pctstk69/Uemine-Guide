@@ -1,19 +1,15 @@
 {
-  "title": "まどマギ×マギレコ おすすめ",
+  "title": "新世紀エヴァンゲリオン〜未来への咆哮〜 おすすめ",
   "label": "今週のおすすめ",
-  "start": "2026-09-28",
-  "end": "2026-10-04",
+  "start": "2026-10-05",
+  "end": "2026-10-11",
   "items": [
     {
-      "name": "L/スマスロマギアレコード/RN",
-      "rate": "20S",
-      "comment": "スマスロ マギアレコード 魔法少女まどか☆マギカ外伝"
-    },
-    {
-      "name": "Pぱちんこ劇場版魔法少女まどか☆マギカA5",
-      "comment": "ぱちんこ 劇場版 魔法少女まどか☆マギカ キュゥべえver."
+      "name": "P新世紀エヴァンゲリオン15 未来への咆哮",
+      "rate": "4P",
+      "comment": "ぱちんこ 新世紀エヴァンゲリオン 〜未来への咆哮〜"
     }
   ],
-  "poster": "assets/weekly/2026-09-28_madomagi_magireco.jpg",
-  "poster_thumb": "assets/weekly/2026-09-28_madomagi_magireco_thumb.jpg"
+  "poster": "assets/weekly/2026-10-05_eva_miraihoko.jpg",
+  "poster_thumb": "assets/weekly/2026-10-05_eva_miraihoko_thumb.jpg"
 }
