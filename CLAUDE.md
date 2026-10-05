@@ -92,7 +92,8 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 
 - URL: https://u1825pctstk69.github.io/Uemine-Guide/p5/?no=<台番号>。台のQRから開くとその台の機種詳細を表示（その台番号を強調）。番号なしは5円一覧
 - まずプラスファイブ（5S）全62台にQRを貼る（ユーザー選択A）。印刷用PDFは台番号順・1ページ20枚（A4、QR約32mm）。QRには台番号だけを入れているので、入替・台移動があってもQRの貼り替えは不要（データ更新で自動追従）
-- 推し機種投票（data/vote.json。GASのランキングページ、常設）へのボタンを、5S機種の詳細画面と5円一覧の上に表示
+- 推し機種投票へのボタン（5S機種の詳細画面と5円一覧の上）は **2026-10-05 ユーザー指示で一時停止**（data/vote.json の url を空にするとボタンが消える）。理由: GASのページを直接開くと「このアプリケーションは Google Apps Script のユーザーによって作成されたものです」の注意書きが出るため。対策案（ガイド側ページにiframeで埋め込み＋GAS側に setXFrameOptionsMode(ALLOWALL)、または投票画面をガイド側で作りGASはAPIのみ）と、1端末1日1票などの連打対策はユーザーが後で判断。再開時のURL: https://script.google.com/macros/s/AKfycbw6tdR_izuTzSpt0jvombtVEZSnfKtsBKUkX0MSTO-kja83vtWxO8Tc-vDJAbkn0gughQ/exec
+- QR印刷用PDFの文言は「この台の機種ガイド／スマホで読み取ってください」（投票の文言は外した）
 - アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**未設定の間は何も送信しない**（ユーザー側の設置待ち）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
 - 既存ページ（index.html・smasuro20）は一切変えていない。テンプレートは tools/templates/p5.html（guide.html のコピー）、作業ブランチ trial/plus5
 - **取り消し方**: main の取り込みコミット「お試し p5（台のQR用ページ）を取り込み」を `git revert -m 1 <そのコミット>` → push。お試し前の状態はコミット e1b392c
