@@ -101,18 +101,20 @@ def main():
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
     open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3', weekly))
     print('index.html / smasuro20/index.html を更新しました。')
-    # お試し: 台のQR用ページ（p5/）。テンプレートがあるときだけ作る
-    p5 = os.path.join(tdir, 'p5.html')
-    if os.path.exists(p5):
+    # 台のQR用ページ（dai/?no=台番号）。テンプレートがあるときだけ作る
+    dt = os.path.join(tdir, 'dai.html')
+    if os.path.exists(dt):
         vf = os.path.join(ROOT, 'data', 'vote.json')
         vote = json.dumps(json.load(open(vf)), ensure_ascii=False) if os.path.exists(vf) else 'null'
         lf = os.path.join(ROOT, 'data', 'log_url.txt')
         logu = open(lf).read().strip() if os.path.exists(lf) else ''
-        t = open(p5).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/', logu)
-        os.makedirs(os.path.join(ROOT, 'p5'), exist_ok=True)
-        html = wrap(t, data, api, '#0F9D8A', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
-        open(os.path.join(ROOT, 'p5', 'index.html'), 'w').write(html)
-        print('p5/index.html（お試し・台のQR用）を更新しました。')
+        cf = os.path.join(ROOT, 'data', 'dai.json')
+        start = json.load(open(cf)).get('start', 'pachi') if os.path.exists(cf) else 'pachi'
+        t = open(dt).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/', logu).replace('/*__START__*/', start)
+        html = wrap(t, data, api, '#B01030', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+        os.makedirs(os.path.join(ROOT, 'dai'), exist_ok=True)
+        open(os.path.join(ROOT, 'dai', 'index.html'), 'w').write(html)
+        print('dai/index.html（台のQR用）を更新しました。')
 
 
 if __name__ == '__main__':

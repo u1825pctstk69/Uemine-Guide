@@ -88,13 +88,13 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 - ユーザーが日付を指定せずに頼んだ場合は即時公開（従来どおり本リポジトリに push）。予約か即時か迷うときは確認する
 - 書き込み用トークン: staging の Actions シークレット `PUBLIC_REPO_TOKEN`（本リポジトリの Contents 書き込みのみ）。**期限 2027-09-30**。期限前にユーザーへ作り直しを案内する
 
-## お試し: 台のQR用ページ p5/（2026-10-05 公開・試験中）
+## 台のQR用ページ dai/（2026-10-05 公開・試験中）
 
-- URL: https://u1825pctstk69.github.io/Uemine-Guide/p5/?no=<台番号>。台のQRから開くとその台の機種詳細を表示（その台番号を強調）。番号なしは5円一覧
-- まずプラスファイブ（5S）全62台にQRを貼る（ユーザー選択A）。印刷用PDFは台番号順・1ページ20枚（A4、QR約32mm）。QRには台番号だけを入れているので、入替・台移動があってもQRの貼り替えは不要（データ更新で自動追従）
-- 推し機種投票へのボタン（5S機種の詳細画面と5円一覧の上）は **2026-10-05 ユーザー指示で一時停止**（data/vote.json の url を空にするとボタンが消える）。理由: GASのページを直接開くと「このアプリケーションは Google Apps Script のユーザーによって作成されたものです」の注意書きが出るため。対策案（ガイド側ページにiframeで埋め込み＋GAS側に setXFrameOptionsMode(ALLOWALL)、または投票画面をガイド側で作りGASはAPIのみ）と、1端末1日1票などの連打対策はユーザーが後で判断。再開時のURL: https://script.google.com/macros/s/AKfycbw6tdR_izuTzSpt0jvombtVEZSnfKtsBKUkX0MSTO-kja83vtWxO8Tc-vDJAbkn0gughQ/exec
-- QR印刷用PDFの文言は「この台の機種ガイド／スマホで読み取ってください」（投票の文言は外した）
-- アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**未設定の間は何も送信しない**（ユーザー側の設置待ち）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
-- 既存ページ（index.html・smasuro20）は一切変えていない。テンプレートは tools/templates/p5.html（guide.html のコピー）、作業ブランチ trial/plus5
-- **取り消し方**: main の取り込みコミット「お試し p5（台のQR用ページ）を取り込み」を `git revert -m 1 <そのコミット>` → push。お試し前の状態はコミット e1b392c
-- 本採用になったら、guide.html への統合と、p5/ を残すか（印刷済みQRのため残す必要あり）を決める
+- URL: https://u1825pctstk69.github.io/Uemine-Guide/dai/?no=<台番号>。**パチンコ・スロット全台**に台ごとのQRを貼る予定（QRはまだ作っていない。作成は後日ユーザーから依頼）。台のQRから開くとその台の機種詳細を表示（その台番号を強調）
+- 旧名 p5/ は廃止（QR未印刷のためユーザー了承済み）。テンプレートは tools/templates/dai.html（guide.html のコピーに機能追加）。既存ページ（index.html・smasuro20）は変えていない
+- **番号なしで開いたときの最初の画面**は data/dai.json の start（pachi=パチンコ一覧 / slot=スロット一覧）。現在 pachi。後でスロットに変える可能性あり（ユーザー）
+- QRには台番号だけを入れる（入替・台移動はデータ更新で自動追従、貼り替え不要）。空き台・欠番や存在しない番号は「○番台の情報が見つかりませんでした」＋一覧
+- QR印刷用PDFの作り方（前回の実績）: 台番号順、A4に4列×5行=20枚、QR約32mm（誤り訂正M）、上に「N番台」、下に「この台の機種ガイド／スマホで読み取ってください」。Chromiumで HTML→PDF（フォント埋め込み）。全QRを1枚ずつ切り出して cv2 で読み、台番号と一致を確認
+- 推し機種投票へのボタンは **2026-10-05 ユーザー指示で一時停止**（data/vote.json の url を空にするとボタンが消える。rates に入れたレートの機種詳細と一覧の上に出る仕組み）。理由: GASのページを直接開くと「このアプリケーションは Google Apps Script のユーザーによって作成されたものです」の注意書きが出るため。対策案（ガイド側ページにiframeで埋め込み＋GAS側に setXFrameOptionsMode(ALLOWALL)、または投票画面をガイド側で作りGASはAPIのみ）と、1端末1日1票などの連打対策はユーザーが後で判断。再開時のURL: https://script.google.com/macros/s/AKfycbw6tdR_izuTzSpt0jvombtVEZSnfKtsBKUkX0MSTO-kja83vtWxO8Tc-vDJAbkn0gughQ/exec
+- アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**未設定の間は何も送信しない**（ユーザー側の設置待ち。推し機種投票と同じアカウントで作る予定、アカウント確認中）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
+- 取り消し方: main の取り込みコミット（「お試し p5（台のQR用ページ）を取り込み」「台のQR用ページを dai/ に…」）を `git revert` → push。お試し前の状態はコミット e1b392c
