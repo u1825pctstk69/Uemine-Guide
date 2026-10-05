@@ -110,7 +110,8 @@ def main():
         logu = open(lf).read().strip() if os.path.exists(lf) else ''
         t = open(p5).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/', logu)
         os.makedirs(os.path.join(ROOT, 'p5'), exist_ok=True)
-        open(os.path.join(ROOT, 'p5', 'index.html'), 'w').write(wrap(t, data, api, '#0F9D8A', weekly))
+        html = wrap(t, data, api, '#0F9D8A', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+        open(os.path.join(ROOT, 'p5', 'index.html'), 'w').write(html)
         print('p5/index.html（お試し・台のQR用）を更新しました。')
 
 

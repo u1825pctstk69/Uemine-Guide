@@ -21,7 +21,9 @@ function doGet(e) {
   if (EVENTS.indexOf(ev) < 0) return done_();
   const no = /^\d{1,4}$/.test(String(p.no || '')) ? Number(p.no) : '';
   const rate = /^(4P|1P|20S|5S)$/.test(String(p.rate || '')) ? String(p.rate) : '';
-  const name = String(p.name || '').slice(0, 80);
+  // 先頭が = + - @ だとスプレッドシートが数式として扱うため、文字として記録する
+  let name = String(p.name || '').replace(/[\r\n\t]/g, ' ').slice(0, 80);
+  if (/^[=+\-@]/.test(name)) name = "'" + name;
   const sid = String(p.sid || '').replace(/[^0-9a-z]/gi, '').slice(0, 16);
   const page = String(p.page || '').replace(/[^0-9a-z]/gi, '').slice(0, 10);
   const lock = LockService.getScriptLock();
@@ -48,11 +50,13 @@ function setup() {
     log = ss.insertSheet(LOG_SHEET);
     log.appendRow(['日時', '種類', '台番号', '機種名', 'レート', 'セッション', 'ページ']);
     log.setFrozenRows(1);
+    log.getRange('D:D').setNumberFormat('@');
+    log.getRange('F:G').setNumberFormat('@');
   }
   let sum = ss.getSheetByName(SUM_SHEET);
   if (!sum) sum = ss.insertSheet(SUM_SHEET);
   sum.clear();
-  const R = LOG_SHEET + '!A:G';
+  const R = "'" + LOG_SHEET + "'!A:G";
   const blocks = [
     ['機種別（QR＋詳細を開いた回数）', `=QUERY(${R},"select E, D, count(B) where (B='qr' or B='view') and D<>'' group by E, D order by count(B) desc label E 'レート', D '機種名', count(B) '回数'",1)`],
     ['台番号別（台のQRを読んだ回数）', `=QUERY(${R},"select C, D, count(B) where B='qr' and C is not null group by C, D order by count(B) desc label C '台番号', D '機種名', count(B) '回数'",1)`],

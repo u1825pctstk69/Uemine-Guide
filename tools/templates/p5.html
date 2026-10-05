@@ -214,7 +214,7 @@ const RATE = {
 const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','設定付き':'set','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
 const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
 let M = [];
-const SEAT = (n=>n>0?n:0)(parseInt(new URLSearchParams(location.search).get('no'),10)); // 台のQR（?no=台番号）
+const SEAT = (v=>/^\d{1,4}$/.test(v)&&+v>0?+v:0)(new URLSearchParams(location.search).get('no')||''); // 台のQR（?no=台番号）
 let cat = location.hash==='#pachi'?'pachi':'slot', rate=location.hash?'all':'5S', q='', notice='';
 // ===== アクセス記録（個人を特定する情報は送らない） =====
 let SID='';try{SID=sessionStorage.getItem('sid')||'';if(!SID){SID=Math.random().toString(36).slice(2,10);sessionStorage.setItem('sid',SID)}}catch(e){}
