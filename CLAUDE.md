@@ -96,5 +96,5 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 - QRには台番号だけを入れる（入替・台移動はデータ更新で自動追従、貼り替え不要）。空き台・欠番や存在しない番号は「○番台の情報が見つかりませんでした」＋一覧
 - QR印刷用PDFの作り方（前回の実績）: 台番号順、A4に4列×5行=20枚、QR約32mm（誤り訂正M）、上に「N番台」、下に「この台の機種ガイド／スマホで読み取ってください」。Chromiumで HTML→PDF（フォント埋め込み）。全QRを1枚ずつ切り出して cv2 で読み、台番号と一致を確認
 - 推し機種投票へのボタンは **2026-10-05 ユーザー指示で一時停止**（data/vote.json の url を空にするとボタンが消える。rates に入れたレートの機種詳細と一覧の上に出る仕組み）。理由: GASのページを直接開くと「このアプリケーションは Google Apps Script のユーザーによって作成されたものです」の注意書きが出るため。対策案（ガイド側ページにiframeで埋め込み＋GAS側に setXFrameOptionsMode(ALLOWALL)、または投票画面をガイド側で作りGASはAPIのみ）と、1端末1日1票などの連打対策はユーザーが後で判断。再開時のURL: https://script.google.com/macros/s/AKfycbw6tdR_izuTzSpt0jvombtVEZSnfKtsBKUkX0MSTO-kja83vtWxO8Tc-vDJAbkn0gughQ/exec
-- アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**未設定の間は何も送信しない**（ユーザー側の設置待ち。推し機種投票と同じアカウントで作る予定、アカウント確認中）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
+- アクセス記録: gas/AccessLog.gs を記録用スプレッドシートに設置しウェブアプリ公開 → URLを data/log_url.txt に書いて update.py。**2026-10-05 設定済み・記録開始**（data/log_url.txt。この環境からは script.google.com に接続できないため、届いたかの最終確認はユーザーのスマホで行う）。記録するのは日時・種類(open/qr/view/vote)・台番号・機種名・レート・ランダムなセッションIDのみ
 - 取り消し方: main の取り込みコミット（「お試し p5（台のQR用ページ）を取り込み」「台のQR用ページを dai/ に…」）を `git revert` → push。お試し前の状態はコミット e1b392c
