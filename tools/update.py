@@ -106,11 +106,11 @@ def main():
     if os.path.exists(dt):
         vf = os.path.join(ROOT, 'data', 'vote.json')
         vote = json.dumps(json.load(open(vf)), ensure_ascii=False) if os.path.exists(vf) else 'null'
-        lf = os.path.join(ROOT, 'data', 'log_url.txt')
-        logu = open(lf).read().strip() if os.path.exists(lf) else ''
+        lf = os.path.join(ROOT, 'data', 'log_form.json')
+        logu = json.dumps(json.load(open(lf)), ensure_ascii=False) if os.path.exists(lf) else 'null'
         cf = os.path.join(ROOT, 'data', 'dai.json')
         start = json.load(open(cf)).get('start', 'pachi') if os.path.exists(cf) else 'pachi'
-        t = open(dt).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/', logu).replace('/*__START__*/', start)
+        t = open(dt).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/null', logu).replace('/*__START__*/', start)
         html = wrap(t, data, api, '#B01030', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
         os.makedirs(os.path.join(ROOT, 'dai'), exist_ok=True)
         open(os.path.join(ROOT, 'dai', 'index.html'), 'w').write(html)

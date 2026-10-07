@@ -206,7 +206,7 @@ let WEEKLY = /*__WEEKLY__*/null;
 const BASE = '../'; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
 const API = '/*__API__*/';
 const VOTE = /*__VOTE__*/null; // 推し機種投票（data/vote.json）
-const LOG = '/*__LOG__*/'; // アクセス記録の送り先（data/log_url.txt）。空なら記録しない // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
+const LOG = /*__LOG__*/null; // アクセス記録の送り先（Googleフォーム、data/log_form.json）。null なら記録しない // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
 const RATE = {
   pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
   slot:[['20S','20円スロット'],['5S','5円スロット（プラスファイブ）']]
@@ -221,11 +221,13 @@ let cat = hashCat(), rate='all', q='', notice='';
 // ===== アクセス記録（個人を特定する情報は送らない） =====
 let SID='';try{SID=sessionStorage.getItem('sid')||'';if(!SID){SID=Math.random().toString(36).slice(2,10);sessionStorage.setItem('sid',SID)}}catch(e){}
 function log(ev,m,no){
-  if(!LOG) return;
-  const p=new URLSearchParams({ev,sid:SID,page:'dai'});
-  if(m){p.set('name',m.name);p.set('rate',m.rate)}
-  if(no) p.set('no',no);
-  try{fetch(LOG+'?'+p,{mode:'no-cors',keepalive:true}).catch(()=>{})}catch(e){}
+  if(!LOG||!LOG.url||!LOG.fields) return;
+  const v={ev,sid:SID,page:'dai'};
+  if(m){v.name=m.name;v.rate=m.rate}
+  if(no) v.no=String(no);
+  const body=new URLSearchParams();
+  for(const k in v){if(LOG.fields[k]) body.append(LOG.fields[k],v[k])}
+  try{fetch(LOG.url,{method:'POST',mode:'no-cors',keepalive:true,body}).catch(()=>{})}catch(e){}
 }
 function voteHTML(){
   if(!VOTE||!VOTE.url) return '';
