@@ -318,11 +318,17 @@ function buildData_(grid, masterRows, sourceName, excludeNos) {
   const rateOrder = { '4P': 0, '1P': 1, '20S': 2, '5S': 3 };
   machines.sort((a, b) => (a.cat === b.cat ? 0 : a.cat === 'pachi' ? -1 : 1) || rateOrder[a.rate] - rateOrder[b.rate] || b.nos.length - a.nos.length || (key_(a.name) < key_(b.name) ? -1 : 1));
 
-  // 更新日・表示名（入替日 D1、開店日は入替日の2日後）
+  // 更新日・表示名（1行目の「開店日」の右の日付。無ければ入替日 D1 の2日後）
   const d1 = toDate_(cell(0, 3));
+  let openCell = null;
+  for (let c = 0; c < 40 && !openCell; c++) {
+    if (String(cell(0, c) || '').replace(/\s/g, '') === '開店日') {
+      for (let c2 = c + 1; c2 < c + 4 && !openCell; c2++) openCell = toDate_(cell(0, c2));
+    }
+  }
   let updated = '', sheet = sourceName;
-  if (d1) {
-    const open = new Date(d1.getTime() + 2 * 86400000);
+  if (openCell || d1) {
+    const open = openCell || new Date(d1.getTime() + 2 * 86400000);
     updated = open.getFullYear() + '-' + ('0' + (open.getMonth() + 1)).slice(-2) + '-' + ('0' + open.getDate()).slice(-2);
     if (!sheet) sheet = (open.getMonth() + 1) + '月' + open.getDate() + '日開店';
   }
