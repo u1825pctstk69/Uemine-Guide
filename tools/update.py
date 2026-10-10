@@ -93,7 +93,8 @@ def main():
     weekly = json.dumps(json.load(open(wk_file)), ensure_ascii=False) if os.path.exists(wk_file) else 'null'
     if weekly != 'null':
         names = {m['name'] for m in json.loads(data)['machines']}
-        for it in json.loads(weekly).get('items', []):
+        wk = json.loads(weekly)
+        for it in [x for c in (wk if isinstance(wk, list) else [wk]) for x in c.get('items', [])]:
             if it['name'] not in names:
                 print('注意: 週間おすすめの機種が設置機種に見つかりません →', it['name'])
     tdir = os.path.join(ROOT, 'tools', 'templates')

@@ -249,39 +249,46 @@ const norm=s=>s.normalize('NFKC').toLowerCase().replace(/\s/g,'');
 function rowHTML(m,compact){
   return `<button class="row" data-id="${m.id}" data-r="${m.rate}">
     <span class="name">${esc(m.name)}</span>
-    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${wkOf(m)?`<span class="wkb">${esc(wkLabel())}</span>`:''}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
+    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${(w=>w?`<span class="wkb">${esc(wkLabel(w.c))}</span>`:'')(wkOf(m))}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
     <span class="count"><b>${m.nos.length}</b><small>台</small></span>
   </button>`;
 }
 // ===== 週間おすすめ台 =====
 const WD=['日','月','火','水','木','金','土'];
-function wkPeriod(){
-  if(!WEEKLY) return '';
-  const f=s=>{const d=new Date(s+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})`};
-  return WEEKLY.start||WEEKLY.end?`${f(WEEKLY.start)}〜${f(WEEKLY.end)}`:'';
-}
-function wkLabel(){return (WEEKLY&&WEEKLY.label)||'今週のおすすめ'}
-function wkActive(){
-  if(!WEEKLY||!WEEKLY.items||!WEEKLY.items.length) return false;
+function wkActive(c){
+  if(!c||!c.items||!c.items.length) return false;
   const today=new Date();today.setHours(0,0,0,0);
-  if(WEEKLY.start&&new Date(WEEKLY.start+'T00:00:00')>today) return false;
-  if(WEEKLY.end&&new Date(WEEKLY.end+'T00:00:00')<today) return false;
+  if(c.start&&new Date(c.start+'T00:00:00')>today) return false;
+  if(c.end&&new Date(c.end+'T00:00:00')<today) return false;
   return true;
 }
-function wkMatches(){ // [{m, comment}]
-  if(!wkActive()) return [];
+// おすすめ企画は1つ（オブジェクト）でも複数（配列）でもよい。期間中のものだけ使う
+function wkCamps(){return (Array.isArray(WEEKLY)?WEEKLY:(WEEKLY?[WEEKLY]:[])).filter(wkActive)}
+function wkPeriod(c){
+  if(!c) return '';
+  const f=s=>{const d=new Date(s+'T00:00:00');return isNaN(d)?'':`${d.getMonth()+1}/${d.getDate()}(${WD[d.getDay()]})`};
+  return c.start||c.end?`${f(c.start)}〜${f(c.end)}`:'';
+}
+function wkLabel(c){return (c&&c.label)||'今週のおすすめ'}
+function wkMatches(c){ // [{m, comment, c}]
   const out=[];
-  WEEKLY.items.forEach(it=>{
+  (c?[c]:wkCamps()).forEach(cp=>cp.items.forEach(it=>{
     const k=norm(it.name||'');
-    M.filter(m=>norm(m.name)===k&&(!it.rate||m.rate===it.rate)).forEach(m=>out.push({m,comment:it.comment||''}));
-  });
+    M.filter(m=>norm(m.name)===k&&(!it.rate||m.rate===it.rate)).forEach(m=>out.push({m,comment:it.comment||'',c:cp}));
+  }));
   return out;
 }
-function wkOf(m){const x=wkMatches().find(w=>w.m.id===m.id);return x?x:null}
+function wkOf(m){return wkMatches().find(w=>w.m.id===m.id)||null}
+function wkAll(m){const s=new Set();return wkMatches().filter(w=>w.m.id===m.id&&!s.has(w.c)&&s.add(w.c))}
 function weeklyHTML(filter){
-  const list=wkMatches().filter(w=>filter(w.m)).sort((a,b)=>(b.m.cat===cat)-(a.m.cat===cat));
-  if(!list.length) return '';
-  return `<section class="weekly" aria-label="${esc(wkLabel())}台"><div class="wk-top"><div class="wk-h"><h2>${(WEEKLY.title||wkLabel()+"台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod())}</span></div>${WEEKLY.poster?`<button class="wk-pbtn" id="wkPoster" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(WEEKLY.poster_thumb||WEEKLY.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`;
+  const cur=typeof cat!=='undefined'?cat:null;
+  const camps=wkCamps().map((c,i)=>{
+    const list=wkMatches(c).filter(w=>filter(w.m));
+    if(cur) list.sort((a,b)=>(b.m.cat===cur)-(a.m.cat===cur));
+    return {c,i,list};
+  }).filter(x=>x.list.length);
+  if(cur) camps.sort((a,b)=>(b.list.some(w=>w.m.cat===cur))-(a.list.some(w=>w.m.cat===cur))||a.i-b.i);
+  return camps.map(({c,i,list})=>`<section class="weekly" aria-label="${esc(wkLabel(c))}台"><div class="wk-top"><div class="wk-h"><h2>${(c.title||wkLabel(c)+"台").split(/[ 　]+/).map(w=>`<span class="nw">${esc(w)}</span>`).join(" ")}</h2><span>${esc(wkPeriod(c))}</span></div>${c.poster?`<button class="wk-pbtn" data-wk="${i}" aria-label="おすすめコーナーを見る"><img src="${esc(BASE+(c.poster_thumb||c.poster))}" alt="" loading="lazy">おすすめコーナー</button>`:''}</div><div class="wk-list">${list.map(({m,comment})=>`<button class="wk" data-id="${m.id}" data-r="${m.rate}"><span class="nm">${esc(m.name)}</span>${comment?`<span class="cm">${esc(comment)}</span>`:''}<span class="ft"><span class="tag rate">${esc(rateName(m.rate))}</span><span>${m.nos.length>3?m.nos.length+'台':m.nos.join('・')+'番台'}</span></span></button>`).join('')}</div></section>`).join('');
 }
 function render(){
   document.querySelectorAll('.tab').forEach(t=>{
@@ -325,7 +332,7 @@ function openSheet(id,seat){
     </div>
    </div>
    <div class="sheet-body">
-    ${(w=>w?`<div class="wk-banner"><b>${esc(wkLabel())}台</b>${esc(w.comment||'')}</div>`:'')(wkOf(m))}
+    ${wkAll(m).map(w=>`<div class="wk-banner"><b>${esc(wkLabel(w.c))}台</b>${esc(w.comment||'')}</div>`).join('')}
     ${seat?`<div class="mine">${seat}番台の機種です</div>`:''}
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span${n===seat?' class="me"':''}>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
@@ -340,8 +347,9 @@ function openSheet(id,seat){
 }
 function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock');if(pending){const d=pending;pending=null;applyData(d)}}
 function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
-function openPoster(){
-  $('#pvImg').src=BASE+WEEKLY.poster;$('#pvImg').alt=wkLabel()+'台のポスター';
+function openPoster(n){
+  const c=wkCamps()[n]; if(!c||!c.poster) return;
+  $('#pvImg').src=BASE+c.poster;$('#pvImg').alt=wkLabel(c)+'台のポスター';
   try{history.pushState({pv:1},'')}catch(e){}
   $('#pv').hidden=false;document.body.classList.add('lock');$('#pvClose').focus();
 }
@@ -351,7 +359,7 @@ window.addEventListener('popstate',()=>{if(!$('#pv').hidden){hidePoster();return
 document.addEventListener('click',e=>{
   const t=e.target.closest('.tab'); if(t){cat=t.dataset.cat;rate='all';history.replaceState(null,'','#'+cat);render();return}
   const c=e.target.closest('.chip'); if(c){rate=c.dataset.rate;render();return}
-  if(e.target.closest('#wkPoster')){openPoster();return}
+  {const pb=e.target.closest('.wk-pbtn');if(pb){openPoster(+pb.dataset.wk);return}}
   if(e.target.id==='pvClose'||e.target.id==='pv'){closePoster();return}
   if(e.target.closest('.vote')){log('vote',$('#sheet').hidden?null:M[+$('#sheet').dataset.id]);return}
   const wk=e.target.closest('.wk'); if(wk){openSheet(+wk.dataset.id);log('view',M[+wk.dataset.id]);return}
