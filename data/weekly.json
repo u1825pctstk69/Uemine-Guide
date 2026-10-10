@@ -1,15 +1,16 @@
 {
-  "title": "新世紀エヴァンゲリオン〜未来への咆哮〜 おすすめ",
-  "label": "今週のおすすめ",
-  "start": "2026-10-05",
-  "end": "2026-10-11",
+  "title": "番長シリーズ おすすめ週間",
+  "label": "おすすめ週間",
+  "start": "2026-10-10",
+  "end": "2026-10-18",
   "items": [
-    {
-      "name": "P新世紀エヴァンゲリオン15 未来への咆哮",
-      "rate": "4P",
-      "comment": "ぱちんこ 新世紀エヴァンゲリオン 〜未来への咆哮〜"
-    }
+    {"name": "L押忍!番長4 A3", "rate": "5S", "comment": "スマスロ 押忍！番長4"},
+    {"name": "L/いざ番長/SB8", "rate": "5S", "comment": "スマスロ いざ！番長"},
+    {"name": "S押忍!番長ZERO PC1", "rate": "5S", "comment": "押忍！番長ZERO"},
+    {"name": "L押忍!番長4 A3", "rate": "20S", "comment": "スマスロ 押忍！番長4"},
+    {"name": "L/いざ番長/SB8", "rate": "20S", "comment": "スマスロ いざ！番長"},
+    {"name": "S押忍!番長ZERO PC1", "rate": "20S", "comment": "押忍！番長ZERO"}
   ],
-  "poster": "assets/weekly/2026-10-05_eva_miraihoko.jpg",
-  "poster_thumb": "assets/weekly/2026-10-05_eva_miraihoko_thumb.jpg"
+  "poster": "assets/weekly/2026-10-10_bancho.jpg",
+  "poster_thumb": "assets/weekly/2026-10-10_bancho_thumb.jpg"
 }
