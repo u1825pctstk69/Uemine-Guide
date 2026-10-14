@@ -77,7 +77,7 @@ input[type=search]{width:100%;font:inherit;font-size:16px;padding:12px 14px;bord
 #tab-pachi[aria-selected="true"]{background:var(--pachi)}
 #tab-slot[aria-selected="true"]{background:var(--slot)}
 .tools{padding-top:8px}
-.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;appearance:none;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:500;min-height:38px;padding:6px 14px;border-radius:999px;cursor:pointer}
 .chip i{width:9px;height:9px;border-radius:50%;background:var(--rc)}
@@ -207,8 +207,8 @@ let WEEKLY = {"title": "番長シリーズ おすすめ週間", "label": "おす
 const BASE = '../'; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
 const API = ''; // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
 const RATE = {
-  pachi:[['4P','4円パチンコ'],['1P','1円パチンコ（プラスワン）']],
-  slot:[['20S','20円スロット'],['5S','5円スロット（プラスファイブ）']]
+  pachi:[['4P','4円パチンコ'],['1P','プラスワン（旧1円パチンコ）']],
+  slot:[['20S','20円スロット'],['5S','プラスファイブ（旧5円スロット）']]
 };
 const TKEY={'甘デジ':'ama','ライトミドル':'lmid','ミドル':'mid','設定付き':'set','ノーマル(Aタイプ)':'a','AT・ART':'at','スマスロ':'sms'};
 const rateName = r => (RATE.pachi.concat(RATE.slot).find(x=>x[0]===r)||[r,r])[1];
