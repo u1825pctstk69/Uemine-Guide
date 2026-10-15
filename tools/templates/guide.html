@@ -14,6 +14,7 @@
   --t-ama:#2E7D32; --t-amas:#E4F4E4; --t-mid:#B0173A; --t-mids:#FCE6EB; --t-smp:#6B3FB8; --t-smps:#EFE8FB;
   --t-a:#8A5A00; --t-as:#FFF2D2; --t-at:#2A4FB0; --t-ats:#E5ECFC; --t-sms:#A1257D; --t-smss:#FBE6F5;
   --series:#8A5A00; --series-s:#FFF2D2;
+  --nt-bg:#FFF8E8; --nt-line:#EED9A8; --nt-rec:#8A5A00; --nt-gift:#C2410C; --nt-event:#2548AE; --nt-info:#1E7A3C;
   --shadow:0 -8px 30px rgba(21,27,46,.18);
 }
 @media (prefers-color-scheme: dark){
@@ -28,7 +29,7 @@
     --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
     --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
     --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
-    --series:#F2C35E; --series-s:#3A2E14;
+    --series:#F2C35E; --series-s:#3A2E14; --nt-bg:#2A2416; --nt-line:#5A4724; --nt-rec:#B07A10; --nt-gift:#D9541A; --nt-event:#3F66D6; --nt-info:#2A8F4C;
     --shadow:0 -8px 30px rgba(0,0,0,.5);
   }
 }
@@ -43,7 +44,7 @@
   --r5:#2FC7B1; --r5s:#123330; --r5t:#6BDDCB;
   --t-ama:#7FD483; --t-amas:#1B3320; --t-mid:#FF8FA6; --t-mids:#3A1C26; --t-smp:#C3A3FF; --t-smps:#2A2140;
   --t-a:#F2C35E; --t-as:#3A2E14; --t-at:#9DB5FF; --t-ats:#1C2748; --t-sms:#F59BD9; --t-smss:#3A1A33;
-  --series:#F2C35E; --series-s:#3A2E14;
+  --series:#F2C35E; --series-s:#3A2E14; --nt-bg:#2A2416; --nt-line:#5A4724; --nt-rec:#B07A10; --nt-gift:#D9541A; --nt-event:#3F66D6; --nt-info:#2A8F4C;
   --shadow:0 -8px 30px rgba(0,0,0,.5);
 }
 [data-r="4P"]{--rc:var(--r4);--rs:var(--r4s);--rt:var(--r4t)}
@@ -148,8 +149,6 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .wk .cm{font-size:13px;color:var(--muted);line-height:1.5}
 .wk .ft{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-top:auto}
 .wkb{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--series);color:var(--surface)}
-.wk-banner{margin:16px 0 0;padding:10px 12px;border-radius:12px;background:var(--series-s);border:1.5px solid var(--series);font-size:14px;line-height:1.5}
-.wk-banner b{display:block;color:var(--series);font-size:12px;margin-bottom:2px}
 .wk-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .wk-pbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;font:inherit;font-size:11px;font-weight:700;color:var(--series);cursor:pointer}
 .wk-pbtn img{width:52px;height:74px;object-fit:cover;border-radius:6px;border:1.5px solid var(--series);display:block;background:var(--surface)}
@@ -170,6 +169,20 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
   .wrap{zoom:1.3;max-width:1100px}
   .sheet{zoom:1.3;max-height:calc(88vh / 1.3)}
 }
+/* お知らせ（機種詳細の上。data/notices.json ＋ 期間中のおすすめ企画） */
+.ntc{margin:14px 0 0}
+.ntc-h{margin:0 0 6px;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.06em}
+.ntc-list{display:flex;flex-direction:column;gap:8px}
+.ntc-card{appearance:none;width:100%;display:flex;gap:10px;align-items:center;text-align:left;font:inherit;color:var(--ink);background:var(--nt-bg);border:1.5px solid var(--nt-line);border-radius:12px;padding:8px 10px}
+button.ntc-card{cursor:pointer}
+.ntc-card img{flex:none;width:44px;height:60px;object-fit:cover;border-radius:6px;background:var(--chip)}
+.ntc-card .tx{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.ntc-card b{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.ntc-card .sb{font-size:12px;color:var(--muted)}
+.ntc-card .tt{font-size:13px;line-height:1.55;white-space:pre-line;overflow-wrap:anywhere}
+.ntc-card .go{flex:none;font-size:22px;line-height:1;color:var(--muted)}
+.ntc-tag{font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;color:#fff;background:var(--nt-info)}
+.ntc-tag[data-k="rec"]{background:var(--nt-rec)}.ntc-tag[data-k="gift"]{background:var(--nt-gift)}.ntc-tag[data-k="event"]{background:var(--nt-event)}
 </style>
 
 <div class="wrap">
@@ -197,6 +210,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 <script>
 let DATA = /*__DATA__*/;
 let WEEKLY = /*__WEEKLY__*/null;
+let NOTICES = /*__NOTICES__*/null;
 const BASE = ''; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
 const API = '/*__API__*/'; // スプレッドシート（GAS）のデータURL。空なら埋め込みデータのみ
 const RATE = {
@@ -296,7 +310,7 @@ function openSheet(id){
     </div>
    </div>
    <div class="sheet-body">
-    ${wkAll(m).map(w=>`<div class="wk-banner"><b>${esc(wkLabel(w.c))}台</b>${esc(w.comment||'')}</div>`).join('')}
+    ${ntHTML()}
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
     ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。同じシリーズで打てる台です。',r.series)}
@@ -309,6 +323,39 @@ function openSheet(id){
 }
 function hideSheet(){$('#sheet').hidden=true;$('#scrim').hidden=true;document.body.classList.remove('lock');if(pending){const d=pending;pending=null;applyData(d)}}
 function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.state.sheet){history.back()}else{hideSheet()}}
+// ===== お知らせ（機種詳細の上に縦に並べる） =====
+// 期間中のおすすめ企画（data/weekly.json）＋ data/notices.json。おすすめを先頭に、ほかは登録順
+const NT_TAG={rec:'おすすめ',gift:'景品',event:'イベント',info:'お知らせ'};
+function ntActive(n){
+  const t=new Date();t.setHours(0,0,0,0);
+  if(n.start&&new Date(n.start+'T00:00:00')>t) return false;
+  if(n.end&&new Date(n.end+'T00:00:00')<t) return false;
+  return true;
+}
+function ntItems(){
+  const out=wkCamps().map((c,i)=>({kind:'rec',tag:NT_TAG.rec,title:c.title||wkLabel(c)+'台',sub:wkPeriod(c),text:'',img:c.poster?BASE+(c.poster_thumb||c.poster):'',full:c.poster?BASE+c.poster:'',wk:i}));
+  const list=(Array.isArray(NOTICES)?NOTICES:(NOTICES?[NOTICES]:[])).filter(n=>n&&n.title&&ntActive(n));
+  list.filter(n=>n.kind==='rec').concat(list.filter(n=>n.kind!=='rec')).forEach(n=>{
+    const k=NT_TAG[n.kind]?n.kind:'info';
+    out.push({kind:k,tag:n.tag||NT_TAG[k],title:n.title,sub:n.sub!=null?n.sub:(n.start||n.end?wkPeriod(n):''),text:n.text||'',
+      img:n.image?BASE+(n.image_thumb||n.image):'',full:n.image?BASE+n.image:''});
+  });
+  return out;
+}
+function ntHTML(){
+  const it=ntItems(); if(!it.length) return '';
+  return `<div class="ntc"><p class="ntc-h">お知らせ</p><div class="ntc-list">${it.map((n,i)=>{
+    const inner=`${n.img?`<img src="${esc(n.img)}" alt="" loading="lazy">`:''}<span class="tx"><span class="ntc-tag" data-k="${n.kind}">${esc(n.tag)}</span><b>${esc(n.title)}</b>${n.sub?`<span class="sb">${esc(n.sub)}</span>`:''}${n.text?`<span class="tt">${esc(n.text)}</span>`:''}</span>`;
+    return n.full?`<button class="ntc-card" data-nt="${i}" aria-label="${esc(n.title)}の画像を見る">${inner}<span class="go" aria-hidden="true">›</span></button>`:`<div class="ntc-card">${inner}</div>`;
+  }).join('')}</div></div>`;
+}
+function openNotice(i){
+  const n=ntItems()[i]; if(!n||!n.full) return;
+  if(n.wk!==undefined){openPoster(n.wk);return}
+  $('#pvImg').src=n.full;$('#pvImg').alt=n.title;
+  try{history.pushState({pv:1},'')}catch(e){}
+  $('#pv').hidden=false;document.body.classList.add('lock');$('#pvClose').focus();
+}
 function openPoster(n){
   const c=wkCamps()[n]; if(!c||!c.poster) return;
   $('#pvImg').src=BASE+c.poster;$('#pvImg').alt=wkLabel(c)+'台のポスター';
@@ -321,6 +368,7 @@ window.addEventListener('popstate',()=>{if(!$('#pv').hidden){hidePoster();return
 document.addEventListener('click',e=>{
   const t=e.target.closest('.tab'); if(t){cat=t.dataset.cat;rate='all';history.replaceState(null,'','#'+cat);render();return}
   const c=e.target.closest('.chip'); if(c){rate=c.dataset.rate;render();return}
+  {const nt=e.target.closest('.ntc-card[data-nt]');if(nt){openNotice(+nt.dataset.nt);return}}
   {const pb=e.target.closest('.wk-pbtn');if(pb){openPoster(+pb.dataset.wk);return}}
   if(e.target.id==='pvClose'||e.target.id==='pv'){closePoster();return}
   const wk=e.target.closest('.wk'); if(wk){openSheet(+wk.dataset.id);return}

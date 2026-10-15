@@ -43,8 +43,8 @@ def dump_grid(ws):
     return grid
 
 
-def wrap(template, data_json, api, theme, weekly):
-    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly)
+def wrap(template, data_json, api, theme, weekly, notices='[]'):
+    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices)
     title = re.search(r'<title>.*?</title>', body).group(0)
     body = body.replace(title, '', 1)
     links = re.findall(r'<link[^>]+>\n?', body)
@@ -97,10 +97,26 @@ def main():
         for it in [x for c in (wk if isinstance(wk, list) else [wk]) for x in c.get('items', [])]:
             if it['name'] not in names:
                 print('注意: 週間おすすめの機種が設置機種に見つかりません →', it['name'])
+    # お知らせ（data/notices.json）。機種詳細の上に、期間中のおすすめ企画と一緒に並ぶ
+    nt_file = os.path.join(ROOT, 'data', 'notices.json')
+    nt = json.load(open(nt_file)) if os.path.exists(nt_file) else []
+    nt = nt if isinstance(nt, list) else [nt]
+    for n in nt:
+        if not n.get('title'):
+            print('注意: お知らせに title がありません →', n)
+        for k in ('start', 'end'):
+            if n.get(k) and not re.fullmatch(r'\d{4}-\d{2}-\d{2}', n[k]):
+                print(f'注意: お知らせの {k} は YYYY-MM-DD で書いてください →', n.get('title'), n[k])
+        for k in ('image', 'image_thumb'):
+            if n.get(k) and not os.path.exists(os.path.join(ROOT, n[k])):
+                print(f'注意: お知らせの画像が見つかりません →', n[k])
+        if n.get('kind') and n['kind'] not in ('rec', 'gift', 'event', 'info'):
+            print('注意: お知らせの kind は rec / gift / event / info のどれか →', n.get('title'), n['kind'])
+    notices = json.dumps(nt, ensure_ascii=False)
     tdir = os.path.join(ROOT, 'tools', 'templates')
-    open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030', weekly))
+    open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030', weekly, notices))
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
-    open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3', weekly))
+    open(os.path.join(ROOT, 'smasuro20', 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'smasuro20.html')).read(), data, api, '#2F5BD3', weekly, notices))
     print('index.html / smasuro20/index.html を更新しました。')
     # 台のQR用ページ（dai/?no=台番号）。テンプレートがあるときだけ作る
     dt = os.path.join(tdir, 'dai.html')
@@ -112,7 +128,7 @@ def main():
         cf = os.path.join(ROOT, 'data', 'dai.json')
         start = json.load(open(cf)).get('start', 'pachi') if os.path.exists(cf) else 'pachi'
         t = open(dt).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/null', logu).replace('/*__START__*/', start)
-        html = wrap(t, data, api, '#B01030', weekly).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+        html = wrap(t, data, api, '#B01030', weekly, notices).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
         os.makedirs(os.path.join(ROOT, 'dai'), exist_ok=True)
         open(os.path.join(ROOT, 'dai', 'index.html'), 'w').write(html)
         print('dai/index.html（台のQR用）を更新しました。')
