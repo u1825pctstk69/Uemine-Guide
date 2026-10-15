@@ -44,6 +44,8 @@ def dump_grid(ws):
 
 
 def wrap(template, data_json, api, theme, weekly, notices='[]'):
+    # 埋め込む JSON に </script> などが入ってもページが壊れないようにする
+    data_json, weekly, notices = [x.replace('</', '<\\/') for x in (data_json, weekly, notices)]
     body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices)
     title = re.search(r'<title>.*?</title>', body).group(0)
     body = body.replace(title, '', 1)
@@ -127,7 +129,7 @@ def main():
         logu = json.dumps(json.load(open(lf)), ensure_ascii=False) if os.path.exists(lf) else 'null'
         cf = os.path.join(ROOT, 'data', 'dai.json')
         start = json.load(open(cf)).get('start', 'pachi') if os.path.exists(cf) else 'pachi'
-        t = open(dt).read().replace('/*__VOTE__*/null', vote).replace('/*__LOG__*/null', logu).replace('/*__START__*/', start)
+        t = open(dt).read().replace('/*__VOTE__*/null', vote.replace('</', '<\\/')).replace('/*__LOG__*/null', logu.replace('</', '<\\/')).replace('/*__START__*/', start)
         html = wrap(t, data, api, '#B01030', weekly, notices).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
         os.makedirs(os.path.join(ROOT, 'dai'), exist_ok=True)
         open(os.path.join(ROOT, 'dai', 'index.html'), 'w').write(html)
