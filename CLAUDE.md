@@ -4,6 +4,12 @@
 公開URL: https://u1825pctstk69.github.io/Uemine-Guide/ （#pachi / #slot）、20円スマスロ: /smasuro20/
 URLは固定。QRコードは印刷済み・貼付予定なので URL・パスを変えないこと。
 
+## 【重要】作業の土台（2026-10-16 ユーザー指示）
+
+- **今後の更新は「お知らせカード第1版」を元に行う。** 第1版は未公開で、非公開リポジトリ Uemine-Guide-staging の `save/2026-10-16-notices-v1`（作業ブランチは `wip/notices`）にある。作業前に `git fetch https://github.com/u1825pctstk69/Uemine-Guide-staging.git wip/notices` して、その内容（CLAUDE.md を含む）で作業する
+- 第1版の公開は**ユーザーの公開指示があるまでしない**。指示前に配置図・おすすめなどの更新を急いで公開する必要があるときの扱いはユーザーに確認する
+- セーブポイントの一覧と戻し方は staging の README.md
+
 ## 配置図Excelを渡されたときの更新手順
 
 0. **作業の前に必ず確認する**：「設置機種ガイドのWebページ更新でよろしいですか？」と一度聞き、返事をもらってから進める（別の作業だった場合にトークンを無駄にしないため。ユーザーの希望）
