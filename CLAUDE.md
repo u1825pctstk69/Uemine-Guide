@@ -96,6 +96,11 @@ URLは固定。QRコードは印刷済み・貼付予定なので URL・パス�
 - WebアプリURLが決まったら `data/api_url.txt` に書いて `tools/update.py` を再実行
 - 解析ロジックを変えるときは `gas/Code.gs` を直す（Node側も同じコードを使う）
 
+## セーブポイント（ユーザー依頼 2026-10-16）
+
+- 「元に戻せる保存」を頼まれたら、その時点の一式を非公開リポジトリ Uemine-Guide-staging に `save/<日付>-<名前>` ブランチとして push する（公開リポジトリには作らない）。一覧は staging の README.md
+- 戻すときは該当ブランチの内容を main に戻し、その後に入ったデータ更新（data.json・weekly.json・notices.json・ポスター）は取り込み直す。公開前の3者チェックを通す
+
 ## 予約公開（2026-10-01 稼働）
 
 - 公開前の内容は非公開リポジトリ `u1825pctstk69/Uemine-Guide-staging` に置く（**本リポジトリは公開なので、公開日前の内容を commit / push しない**）。詳細はそのリポジトリの README.md
