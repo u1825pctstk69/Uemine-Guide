@@ -7,5 +7,14 @@
     "end": "2026-10-21",
     "image": "assets/notices/2026-10-19_shinsou.jpg",
     "image_thumb": "assets/notices/2026-10-19_shinsou_thumb.jpg"
+  },
+  {
+    "kind": "event",
+    "title": "焼き芋屋台開催",
+    "sub": "10月22日(木) 開催",
+    "start": "2026-10-19",
+    "end": "2026-10-22",
+    "image": "assets/notices/2026-10-19_yakiimo.jpg",
+    "image_thumb": "assets/notices/2026-10-19_yakiimo_thumb.jpg"
   }
 ]
