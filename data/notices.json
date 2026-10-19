@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "kind": "event",
+    "title": "新装開店",
+    "sub": "10月21日(水) AM10:00 OPEN（予定）",
+    "start": "2026-10-19",
+    "end": "2026-10-21",
+    "image": "assets/notices/2026-10-19_shinsou.jpg",
+    "image_thumb": "assets/notices/2026-10-19_shinsou_thumb.jpg"
+  }
+]
