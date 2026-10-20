@@ -155,6 +155,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .wk .cm{font-size:13px;color:var(--muted);line-height:1.5}
 .wk .ft{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-top:auto}
 .wkb{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--series);color:var(--surface)}
+.nwb{display:inline-block;font-size:11px;font-weight:800;padding:1px 7px;border-radius:5px;background:#E60012;color:#FFFFFF}
 .wk-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .wk-pbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:transparent;padding:0;font:inherit;font-size:11px;font-weight:700;color:var(--series);cursor:pointer}
 .wk-pbtn img{width:52px;height:74px;object-fit:cover;border-radius:6px;border:1.5px solid var(--series);display:block;background:var(--surface)}
@@ -217,6 +218,15 @@ button.ntc-card{cursor:pointer}
 let DATA = /*__DATA__*/;
 let WEEKLY = /*__WEEKLY__*/null;
 let NOTICES = /*__NOTICES__*/null;
+let NEWM = /*__NEWM__*/null;
+function isNew(m){ // 新台バッジ（data/newmachines.json、期間中だけ）
+  if(!NEWM||!NEWM.items) return false;
+  const t=new Date();t.setHours(0,0,0,0);
+  if(NEWM.start&&new Date(NEWM.start+'T00:00:00')>t) return false;
+  if(NEWM.end&&new Date(NEWM.end+'T00:00:00')<t) return false;
+  return NEWM.items.some(it=>norm(it.name||'')===norm(m.name)&&(!it.rate||it.rate===m.rate));
+}
+function newB(){return `<span class="nwb">${esc((NEWM&&NEWM.label)||'新台')}</span>`}
 const BASE = '../'; // 画像などの置き場所（サイトの一番上からの相対パス） // 週間おすすめ台（data/weekly.json）
 const API = '/*__API__*/';
 const VOTE = /*__VOTE__*/null; // 推し機種投票（data/vote.json）
@@ -254,7 +264,7 @@ const norm=s=>s.normalize('NFKC').toLowerCase().replace(/\s/g,'');
 function rowHTML(m,compact){
   return `<button class="row" data-id="${m.id}" data-r="${m.rate}">
     <span class="name">${esc(m.name)}</span>
-    <span class="meta"><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${(w=>w?`<span class="wkb">${esc(wkLabel(w.c))}</span>`:'')(wkOf(m))}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
+    <span class="meta">${isNew(m)?newB():''}<span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${(w=>w?`<span class="wkb">${esc(wkLabel(w.c))}</span>`:'')(wkOf(m))}${compact?`<span>${esc(rateName(m.rate))}</span>`:''}${m.series&&!compact?`<span class="ser">${esc(m.series)}シリーズ</span>`:''}</span>
     <span class="count"><b>${m.nos.length}</b><small>台</small></span>
   </button>`;
 }
@@ -331,7 +341,7 @@ function openSheet(id,seat){
    <div class="sheet-head">
     <div class="grab"></div>
     <div class="sheet-top">
-      <div><div class="tags"><span class="tag rate">${esc(rateName(m.rate))}</span><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${m.series?`<span class="tag series">${esc(m.series)}シリーズ</span>`:''}</div>
+      <div><div class="tags">${isNew(m)?newB():''}<span class="tag rate">${esc(rateName(m.rate))}</span><span class="type" data-t="${TKEY[m.type]||''}">${esc(m.type)}</span>${m.smart?'<span class="sp">スマパチ</span>':''}${m.series?`<span class="tag series">${esc(m.series)}シリーズ</span>`:''}</div>
       <h3>${esc(m.name)}</h3></div>
       <button class="close" id="close" aria-label="閉じる">×</button>
     </div>

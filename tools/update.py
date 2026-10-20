@@ -43,10 +43,15 @@ def dump_grid(ws):
     return grid
 
 
+# 新台バッジ（data/newmachines.json）: {"label": "新台", "start": "YYYY-MM-DD", "end": "YYYY-MM-DD", "items": [{"name": 型式, "rate": 任意}]}
+_nm = os.path.join(ROOT, 'data', 'newmachines.json')
+NEWM = json.dumps(json.load(open(_nm)), ensure_ascii=False) if os.path.exists(_nm) else 'null'
+
+
 def wrap(template, data_json, api, theme, weekly, notices='[]'):
     # 埋め込む JSON に </script> などが入ってもページが壊れないようにする
     data_json, weekly, notices = [x.replace('</', '<\\/') for x in (data_json, weekly, notices)]
-    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices)
+    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices).replace('/*__NEWM__*/null', NEWM.replace('</', '<\\/'))
     title = re.search(r'<title>.*?</title>', body).group(0)
     body = body.replace(title, '', 1)
     links = re.findall(r'<link[^>]+>\n?', body)
@@ -115,6 +120,11 @@ def main():
         if n.get('kind') and n['kind'] not in ('rec', 'gift', 'event', 'info'):
             print('注意: お知らせの kind は rec / gift / event / info のどれか →', n.get('title'), n['kind'])
     notices = json.dumps(nt, ensure_ascii=False)
+    if NEWM != 'null':
+        names = {(m['name'], m['rate']) for m in json.loads(data)['machines']}
+        for it in json.loads(NEWM).get('items', []):
+            if not any(n == it['name'] and (not it.get('rate') or r == it['rate']) for n, r in names):
+                print('注意: 新台バッジの機種が設置機種に見つかりません →', it['name'])
     tdir = os.path.join(ROOT, 'tools', 'templates')
     open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030', weekly, notices))
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
