@@ -1,16 +1,40 @@
 {
-  "title": "番長シリーズ おすすめ週間",
+  "title": "ヤマサ おすすめ週間",
   "label": "おすすめ週間",
-  "start": "2026-10-10",
-  "end": "2026-10-18",
+  "start": "2026-10-22",
+  "end": "2026-10-28",
   "items": [
-    {"name": "L押忍!番長4 A3", "rate": "5S", "comment": "スマスロ 押忍！番長4"},
-    {"name": "L/いざ番長/SB8", "rate": "5S", "comment": "スマスロ いざ！番長"},
-    {"name": "S押忍!番長ZERO PC1", "rate": "5S", "comment": "押忍！番長ZERO"},
-    {"name": "L押忍!番長4 A3", "rate": "20S", "comment": "スマスロ 押忍！番長4"},
-    {"name": "L/いざ番長/SB8", "rate": "20S", "comment": "スマスロ いざ！番長"},
-    {"name": "S押忍!番長ZERO PC1", "rate": "20S", "comment": "押忍！番長ZERO"}
+    {
+      "name": "SハイパーラッシュSLC8",
+      "rate": "20S",
+      "comment": "ハイパーラッシュ"
+    },
+    {
+      "name": "LスーパーブラックジャックSLDC",
+      "rate": "20S",
+      "comment": "スマスロ スーパーブラックジャック"
+    },
+    {
+      "name": "LパチスロゴッドイーターリザレクションSLED",
+      "rate": "20S",
+      "comment": "スマスロ ゴッドイーター リザレクション"
+    },
+    {
+      "name": "Lモンキーターン5CE",
+      "rate": "20S",
+      "comment": "スマスロ モンキーターン5"
+    },
+    {
+      "name": "Sモンキーターン4ZDD",
+      "rate": "20S",
+      "comment": "モンキーターン4"
+    },
+    {
+      "name": "SニューパルサーSP3CC",
+      "rate": "20S",
+      "comment": "ニューパルサーSP3"
+    }
   ],
-  "poster": "assets/weekly/2026-10-10_bancho.jpg",
-  "poster_thumb": "assets/weekly/2026-10-10_bancho_thumb.jpg"
+  "poster": "assets/weekly/2026-10-22_yamasa.jpg",
+  "poster_thumb": "assets/weekly/2026-10-22_yamasa_thumb.jpg"
 }
