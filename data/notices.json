@@ -1,20 +1,20 @@
 [
   {
     "kind": "event",
-    "title": "焼き芋屋台開催",
-    "sub": "11月1日(日) 開催",
-    "start": "2026-10-29",
-    "end": "2026-11-01",
-    "image": "assets/notices/2026-10-29_yakiimo.jpg",
-    "image_thumb": "assets/notices/2026-10-29_yakiimo_thumb.jpg"
-  },
-  {
-    "kind": "event",
     "title": "たまご交換会",
     "sub": "10月31日(土) 開催",
     "start": "2026-10-29",
     "end": "2026-10-31",
     "image": "assets/notices/2026-10-29_tamago.jpg",
     "image_thumb": "assets/notices/2026-10-29_tamago_thumb.jpg"
+  },
+  {
+    "kind": "event",
+    "title": "焼き芋屋台開催",
+    "sub": "11月1日(日) 開催",
+    "start": "2026-10-29",
+    "end": "2026-11-01",
+    "image": "assets/notices/2026-10-29_yakiimo.jpg",
+    "image_thumb": "assets/notices/2026-10-29_yakiimo_thumb.jpg"
   }
 ]
