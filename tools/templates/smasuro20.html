@@ -328,10 +328,11 @@ function closeSheet(){if($('#sheet').hidden)return;if(history.state&&history.sta
 // ===== お知らせ（機種詳細の上に縦に並べる） =====
 // 期間中のおすすめ企画（data/weekly.json）＋ data/notices.json。おすすめを先頭に、ほかは登録順
 const NT_TAG={rec:'おすすめ',gift:'景品',event:'イベント',info:'お知らせ'};
-function ntActive(n){
-  const t=new Date();t.setHours(0,0,0,0);
-  if(n.start&&new Date(n.start+'T00:00:00')>t) return false;
-  if(n.end&&new Date(n.end+'T00:00:00')<t) return false;
+function ntActive(n){ // start/end は "YYYY-MM-DD"（日単位）か "YYYY-MM-DDTHH:MM"（時刻まで。end はその時刻で終了）
+  const now=new Date(),t=new Date();t.setHours(0,0,0,0);
+  const tm=v=>/T\d\d:\d\d$/.test(v);
+  if(n.start&&(tm(n.start)?new Date(n.start+':00')>now:new Date(n.start+'T00:00:00')>t)) return false;
+  if(n.end&&(tm(n.end)?new Date(n.end+':00')<=now:new Date(n.end+'T00:00:00')<t)) return false;
   return true;
 }
 function ntItems(){

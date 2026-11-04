@@ -112,8 +112,8 @@ def main():
         if not n.get('title'):
             print('注意: お知らせに title がありません →', n)
         for k in ('start', 'end'):
-            if n.get(k) and not re.fullmatch(r'\d{4}-\d{2}-\d{2}', n[k]):
-                print(f'注意: お知らせの {k} は YYYY-MM-DD で書いてください →', n.get('title'), n[k])
+            if n.get(k) and not re.fullmatch(r'\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?', n[k]):
+                print(f'注意: お知らせの {k} は YYYY-MM-DD（時刻まで指定するときは YYYY-MM-DDTHH:MM）で書いてください →', n.get('title'), n[k])
         for k in ('image', 'image_thumb'):
             if n.get(k) and not os.path.exists(os.path.join(ROOT, n[k])):
                 print(f'注意: お知らせの画像が見つかりません →', n[k])
