@@ -138,6 +138,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .rec h4::before{content:"";width:6px;height:16px;border-radius:3px;background:var(--hd)}
 .rec.series-rec{--hd:var(--series)}
 .rec.type-rec{--hd:var(--rc)}
+.rec.anime-rec{--hd:#C2410C}
 .rec p{font-size:12px;color:var(--muted);margin:0 0 8px}
 .rec .list{border-radius:12px}
 .rec .row{padding:10px 12px}
@@ -219,6 +220,7 @@ let DATA = /*__DATA__*/;
 let WEEKLY = /*__WEEKLY__*/null;
 let NOTICES = /*__NOTICES__*/null;
 let NEWM = /*__NEWM__*/null;
+let ANIME = /*__ANIME__*/null;
 function isNew(m){ // 新台バッジ（data/newmachines.json、期間中だけ）
   if(!NEWM||!NEWM.items) return false;
   const t=new Date();t.setHours(0,0,0,0);
@@ -324,6 +326,14 @@ function render(){
   }
   $('#main').innerHTML=(notice?`<div class="notice">${esc(notice)}</div>`:'')+(qq?'':weeklyHTML(()=>true))+(html||`<div class="empty">「${esc(q)}」に一致する機種はありません</div>`);
 }
+// ===== アニメ系の台（data/anime.json。回遊策の対象機種だけ「同じタイプの台」の代わりに出す） =====
+function animeList(m){
+  if(!ANIME||!ANIME.items) return null;
+  const key=x=>x.name+'|'+x.rate, set=ANIME.items.map(it=>it.name+'|'+it.rate);
+  if(!set.includes(key(m))) return null;
+  const list=set.map(k=>M.find(x=>key(x)===k)).filter(x=>x&&x.id!==m.id);
+  return list.filter(x=>x.rate!==m.rate).concat(list.filter(x=>x.rate===m.rate));
+}
 function recommend(m){
   const pool=M.filter(x=>x.cat===m.cat&&x.id!==m.id);
   const byUnits=(a,b)=>(b.rate===m.rate)-(a.rate===m.rate)||b.nos.length-a.nos.length;
@@ -352,8 +362,9 @@ function openSheet(id,seat){
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span${n===seat?' class="me"':''}>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
     ${voteFor(m.rate)?voteHTML():''}
+    ${(an=>an?recBlock('anime-rec',esc(ANIME.title||'アニメ系の台'),esc(ANIME.sub||''),an):'')(animeList(m))}
     ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。同じシリーズで打てる台です。',r.series)}
-    ${recBlock('type-rec',(m.cat==='pachi'?`同じスペックの台（${esc(m.type)}）`:`同じタイプの台（${esc(m.type)}）`),'遊び方の近い台です。同じレートの台を先に並べています。',r.type)}
+    ${animeList(m)?'':`${recBlock('type-rec',(m.cat==='pachi'?`同じスペックの台（${esc(m.type)}）`:`同じタイプの台（${esc(m.type)}）`),'遊び方の近い台です。同じレートの台を先に並べています。',r.type)}`}
    </div>
   `;
   if($('#sheet').hidden){try{history.pushState({sheet:1},'')}catch(e){}}

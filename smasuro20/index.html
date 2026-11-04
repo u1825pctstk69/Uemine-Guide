@@ -138,6 +138,7 @@ footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
 .rec h4::before{content:"";width:6px;height:16px;border-radius:3px;background:var(--hd)}
 .rec.series-rec{--hd:var(--series)}
 .rec.type-rec{--hd:var(--rc)}
+.rec.anime-rec{--hd:#C2410C}
 .rec p{font-size:12px;color:var(--muted);margin:0 0 8px}
 .rec .list{border-radius:12px}
 .rec .row{padding:10px 12px}
@@ -220,6 +221,7 @@ let DATA = {"updated":"2026-11-04","sheet":"11月5日開店","machines":[{"name"
 let WEEKLY = {"title": "ヤマサ おすすめ週間", "label": "おすすめ週間", "start": "2026-10-22", "end": "2026-10-28", "items": [{"name": "SハイパーラッシュSLC8", "rate": "20S", "comment": "ハイパーラッシュ"}, {"name": "LスーパーブラックジャックSLDC", "rate": "20S", "comment": "スマスロ スーパーブラックジャック"}, {"name": "LパチスロゴッドイーターリザレクションSLED", "rate": "20S", "comment": "スマスロ ゴッドイーター リザレクション"}, {"name": "Lモンキーターン5CE", "rate": "20S", "comment": "スマスロ モンキーターン5"}, {"name": "Sモンキーターン4ZDD", "rate": "20S", "comment": "モンキーターン4"}, {"name": "SニューパルサーSP3CC", "rate": "20S", "comment": "ニューパルサーSP3"}], "poster": "assets/weekly/2026-10-22_yamasa.jpg", "poster_thumb": "assets/weekly/2026-10-22_yamasa_thumb.jpg"};
 let NOTICES = [{"kind": "event", "title": "たまご交換会", "sub": "毎週土曜日 開催", "start": "2026-11-04", "end": "2026-11-07T18:00", "image": "assets/notices/2026-11-04_tamago.jpg", "image_thumb": "assets/notices/2026-11-04_tamago_thumb.jpg"}, {"kind": "event", "title": "焼き芋屋台開催", "sub": "11月11日(水) 開催", "start": "2026-11-04", "end": "2026-11-11T18:00", "image": "assets/notices/2026-11-04_yakiimo.jpg", "image_thumb": "assets/notices/2026-11-04_yakiimo_thumb.jpg"}];
 let NEWM = {"label": "新台", "start": "2026-11-04", "items": [{"name": "eフィーバー炎炎ノ消防隊2MS", "rate": "4P"}, {"name": "e/押忍番長漢の頂/L09", "rate": "1P"}, {"name": "P魔王学院の不適合者FMY", "rate": "1P"}, {"name": "L/SHAMANKING/SS", "rate": "5S"}, {"name": "L/SHAMANKING/SS", "rate": "20S"}]};
+let ANIME = {"title": "アニメ系の台", "sub": "アニメ系の世界をもっと楽しもう！", "items": [{"name": "L 防振り FN", "rate": "5S"}, {"name": "S パチスロ七つの大罪 XS", "rate": "5S"}, {"name": "Sこの素晴らしい世界に祝福を!ZR", "rate": "5S"}, {"name": "PAフィーバーアクエリオン6bY", "rate": "1P"}, {"name": "P新世紀エヴァンゲリオン シト、新生Y", "rate": "1P"}, {"name": "Pとある魔術の禁書目録2 Light JWX", "rate": "1P"}]};
 function isNew(m){ // 新台バッジ（data/newmachines.json、期間中だけ）
   if(!NEWM||!NEWM.items) return false;
   const t=new Date();t.setHours(0,0,0,0);
@@ -299,6 +301,14 @@ function render(){
   $('#sub').textContent=`${PAGE.length}機種 ／ 台番 ${Math.min(...all)}〜${Math.max(...all)}`;
   $('#main').innerHTML=weeklyHTML(m=>PAGE.includes(m))+`<section class="rate" data-r="20S"><div class="list">${PAGE.map(floorRow).join('')}</div></section>`;
 }
+// ===== アニメ系の台（data/anime.json。回遊策の対象機種だけ「同じタイプの台」の代わりに出す） =====
+function animeList(m){
+  if(!ANIME||!ANIME.items) return null;
+  const key=x=>x.name+'|'+x.rate, set=ANIME.items.map(it=>it.name+'|'+it.rate);
+  if(!set.includes(key(m))) return null;
+  const list=set.map(k=>M.find(x=>key(x)===k)).filter(x=>x&&x.id!==m.id);
+  return list.filter(x=>x.rate!==m.rate).concat(list.filter(x=>x.rate===m.rate));
+}
 function recommend(m){
   const series=m.series?M.filter(x=>x.cat==='slot'&&x.series===m.series&&x.id!==m.id)
     .sort((a,b)=>(b.rate==='20S')-(a.rate==='20S')||b.nos.length-a.nos.length):[];
@@ -323,8 +333,9 @@ function openSheet(id){
     ${ntHTML()}
     <dl class="facts"><dt>設置台数</dt><dd><b>${m.nos.length}</b> 台</dd><dt>台番号</dt><dd><div class="nos">${m.nos.map(n=>`<span>${n}</span>`).join('')}</div></dd></dl>
     <a class="cta" href="${pw}" target="_blank" rel="noopener">${m.pw?'P-WORLDで機種情報を見る ↗':'P-WORLD機種インデックスを開く ↗'}</a>
+    ${(an=>an?recBlock('anime-rec',esc(ANIME.title||'アニメ系の台'),esc(ANIME.sub||''),an):'')(animeList(m))}
     ${recBlock('series-rec','同じシリーズの台','この機種が好きな方に。ほかのレートの台も含めて、同じシリーズの台です。',r.series)}
-    ${recBlock('type-rec','ほかの20円スマスロ','当店の20円スマスロです。',r.type)}
+    ${animeList(m)?'':`${recBlock('type-rec','ほかの20円スマスロ','当店の20円スマスロです。',r.type)}`}
    </div>
   `;
   if($('#sheet').hidden){try{history.pushState({sheet:1},'')}catch(e){}}

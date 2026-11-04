@@ -46,12 +46,15 @@ def dump_grid(ws):
 # 新台バッジ（data/newmachines.json）: {"label": "新台", "start": "YYYY-MM-DD", "end": "YYYY-MM-DD", "items": [{"name": 型式, "rate": 任意}]}
 _nm = os.path.join(ROOT, 'data', 'newmachines.json')
 NEWM = json.dumps(json.load(open(_nm)), ensure_ascii=False) if os.path.exists(_nm) else 'null'
+# アニメ系の台（data/anime.json）: 対象機種の詳細で「同じタイプの台」の代わりに表示（回遊策 2026-11）
+_an = os.path.join(ROOT, 'data', 'anime.json')
+ANIME = json.dumps(json.load(open(_an)), ensure_ascii=False) if os.path.exists(_an) else 'null'
 
 
 def wrap(template, data_json, api, theme, weekly, notices='[]'):
     # 埋め込む JSON に </script> などが入ってもページが壊れないようにする
     data_json, weekly, notices = [x.replace('</', '<\\/') for x in (data_json, weekly, notices)]
-    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices).replace('/*__NEWM__*/null', NEWM.replace('</', '<\\/'))
+    body = template.replace('/*__DATA__*/', data_json).replace('/*__API__*/', api).replace('/*__WEEKLY__*/null', weekly).replace('/*__NOTICES__*/null', notices).replace('/*__NEWM__*/null', NEWM.replace('</', '<\\/')).replace('/*__ANIME__*/null', ANIME.replace('</', '<\\/'))
     title = re.search(r'<title>.*?</title>', body).group(0)
     body = body.replace(title, '', 1)
     links = re.findall(r'<link[^>]+>\n?', body)
@@ -125,6 +128,11 @@ def main():
         for it in json.loads(NEWM).get('items', []):
             if not any(n == it['name'] and (not it.get('rate') or r == it['rate']) for n, r in names):
                 print('注意: 新台バッジの機種が設置機種に見つかりません →', it['name'])
+    if ANIME != 'null':
+        pairs = {(m['name'], m['rate']) for m in json.loads(data)['machines']}
+        for it in json.loads(ANIME).get('items', []):
+            if (it['name'], it.get('rate')) not in pairs:
+                print('注意: アニメ系の台の機種が設置機種に見つかりません →', it['name'], it.get('rate'))
     tdir = os.path.join(ROOT, 'tools', 'templates')
     open(os.path.join(ROOT, 'index.html'), 'w').write(wrap(open(os.path.join(tdir, 'guide.html')).read(), data, api, '#B01030', weekly, notices))
     os.makedirs(os.path.join(ROOT, 'smasuro20'), exist_ok=True)
