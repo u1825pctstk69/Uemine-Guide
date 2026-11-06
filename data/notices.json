@@ -16,5 +16,14 @@
     "end": "2026-11-11T18:00",
     "image": "assets/notices/2026-11-04_yakiimo.jpg",
     "image_thumb": "assets/notices/2026-11-04_yakiimo_thumb.jpg"
+  },
+  {
+    "kind": "event",
+    "title": "全国パチンコ・パチスロ ファン感謝デー",
+    "sub": "11月13日(金)〜15日(日) 開催",
+    "start": "2026-11-07T18:00",
+    "end": "2026-11-15T20:00",
+    "image": "assets/notices/2026-11-07_fankansha.jpg",
+    "image_thumb": "assets/notices/2026-11-07_fankansha_thumb.jpg"
   }
 ]
