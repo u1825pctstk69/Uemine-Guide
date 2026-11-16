@@ -25,5 +25,14 @@
     "end": "2026-11-15T20:00",
     "image": "assets/notices/2026-11-07_fankansha.jpg",
     "image_thumb": "assets/notices/2026-11-07_fankansha_thumb.jpg"
+  },
+  {
+    "kind": "event",
+    "title": "新装開店",
+    "sub": "11月19日(木) AM10:00 OPEN(予定)",
+    "start": "2026-11-16",
+    "end": "2026-11-30",
+    "image": "assets/notices/2026-11-16_shinsou.jpg",
+    "image_thumb": "assets/notices/2026-11-16_shinsou_thumb.jpg"
   }
 ]
