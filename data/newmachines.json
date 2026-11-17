@@ -1,11 +1,11 @@
 {
   "label": "新台",
-  "start": "2026-11-04",
+  "start": "2026-11-18",
   "items": [
-    {"name": "eフィーバー炎炎ノ消防隊2MS", "rate": "4P"},
-    {"name": "e/押忍番長漢の頂/L09", "rate": "1P"},
-    {"name": "P魔王学院の不適合者FMY", "rate": "1P"},
-    {"name": "L/SHAMANKING/SS", "rate": "5S"},
-    {"name": "L/SHAMANKING/SS", "rate": "20S"}
+    {"name": "e盾の勇者の成り上がりEREF", "rate": "4P"},
+    {"name": "Lとある科学の超電磁砲2FV", "rate": "20S"},
+    {"name": "L スマスロ化物語 KH", "rate": "20S"},
+    {"name": "LダーリンインザフランキスSA", "rate": "20S"},
+    {"name": "Lダンベル何キロ持てる?X", "rate": "5S"}
   ]
 }

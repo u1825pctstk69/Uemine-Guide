@@ -299,7 +299,8 @@ function buildData_(grid, masterRows, sourceName, excludeNos) {
     if (u.no != null) groups[k].nos.push(u.no);
   });
 
-  const machines = order.map(k => {
+  // 台番号のない型式は載せない（配置図の欄外メモなどを機種として拾わないため）
+  const machines = order.filter(k => groups[k].nos.length > 0).map(k => {
     const g = groups[k];
     const s = g.name;
     const cat = /^[Pe]/.test(s) ? 'pachi' : 'slot';
