@@ -1,40 +1,42 @@
-{
-  "title": "ヤマサ おすすめ週間",
-  "label": "おすすめ週間",
-  "start": "2026-10-22",
-  "end": "2026-10-28",
-  "items": [
-    {
-      "name": "SハイパーラッシュSLC8",
-      "rate": "20S",
-      "comment": "ハイパーラッシュ"
-    },
-    {
-      "name": "LスーパーブラックジャックSLDC",
-      "rate": "20S",
-      "comment": "スマスロ スーパーブラックジャック"
-    },
-    {
-      "name": "LパチスロゴッドイーターリザレクションSLED",
-      "rate": "20S",
-      "comment": "スマスロ ゴッドイーター リザレクション"
-    },
-    {
-      "name": "Lモンキーターン5CE",
-      "rate": "20S",
-      "comment": "スマスロ モンキーターン5"
-    },
-    {
-      "name": "Sモンキーターン4ZDD",
-      "rate": "20S",
-      "comment": "モンキーターン4"
-    },
-    {
-      "name": "SニューパルサーSP3CC",
-      "rate": "20S",
-      "comment": "ニューパルサーSP3"
-    }
-  ],
-  "poster": "assets/weekly/2026-10-22_yamasa.jpg",
-  "poster_thumb": "assets/weekly/2026-10-22_yamasa_thumb.jpg"
-}
+[
+  {
+    "title": "新世紀エヴァンゲリオン〜未来への咆哮〜 おすすめ機種",
+    "label": "おすすめ機種",
+    "start": "2026-11-19",
+    "end": "2026-11-25",
+    "items": [
+      {
+        "name": "P新世紀エヴァンゲリオン15 未来への咆哮",
+        "rate": "4P",
+        "comment": "ぱちんこ 新世紀エヴァンゲリオン 〜未来への咆哮〜"
+      }
+    ],
+    "poster": "assets/weekly/2026-11-19_eva_miraihoko.jpg",
+    "poster_thumb": "assets/weekly/2026-11-19_eva_miraihoko_thumb.jpg"
+  },
+  {
+    "title": "ヤマサ おすすめ週間",
+    "label": "おすすめ週間",
+    "start": "2026-11-19",
+    "end": "2026-11-25",
+    "items": [
+      {
+        "name": "Lモンキーターン5CE",
+        "rate": "20S",
+        "comment": "スマスロ モンキーターン5"
+      },
+      {
+        "name": "LスーパーブラックジャックSLDC",
+        "rate": "20S",
+        "comment": "スマスロ スーパーブラックジャック"
+      },
+      {
+        "name": "LパチスロゴッドイーターリザレクションSLED",
+        "rate": "20S",
+        "comment": "スマスロ ゴッドイーター リザレクション"
+      }
+    ],
+    "poster": "assets/weekly/2026-11-19_yamasa.jpg",
+    "poster_thumb": "assets/weekly/2026-11-19_yamasa_thumb.jpg"
+  }
+]
